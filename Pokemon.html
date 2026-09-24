@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>⚡ Pokemon Battle 2D v2.9.4 - Owner Gereno ⚡</title>
+<title>⚡ Pokemon Battle 2D v3.1.2 - Owner Gereno ⚡</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:#050510;color:#fff;user-select:none;touch-action:manipulation}
@@ -82,6 +82,11 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .pk.mega{border-color:#ff3b9a;box-shadow:0 0 0 2px rgba(255,59,154,.4),0 12px 30px rgba(255,59,154,.4);
   background:linear-gradient(180deg,rgba(255,59,154,.2),rgba(120,0,80,.4))}
 .pk.mega .type{background:rgba(255,59,154,.6)}
+.pk.dewa{border-color:#ffd700;box-shadow:0 0 0 3px rgba(255,215,0,.6),0 12px 40px rgba(255,215,0,.6),0 0 80px rgba(255,215,0,.3);
+  background:linear-gradient(180deg,rgba(255,215,0,.25),rgba(180,120,0,.5));animation:dewaCard 3s ease-in-out infinite}
+@keyframes dewaCard{0%,100%{box-shadow:0 0 0 3px rgba(255,215,0,.6),0 12px 40px rgba(255,215,0,.6),0 0 80px rgba(255,215,0,.3)}
+  50%{box-shadow:0 0 0 3px rgba(255,215,0,.9),0 12px 50px rgba(255,215,0,.9),0 0 120px rgba(255,215,0,.5)}}
+.pk.dewa .type{background:linear-gradient(135deg,#ffd700,#ff8c00);color:#1a0800;font-weight:900}
 .pk.in-team{border-color:#2ecc71;box-shadow:0 0 0 3px rgba(46,204,113,.4),0 12px 30px rgba(46,204,113,.3)}
 .pk.bulk-selected{border-color:#ff9a4a;box-shadow:0 0 0 3px rgba(255,154,74,.5),0 12px 30px rgba(255,154,74,.5);
   background:linear-gradient(180deg,rgba(255,154,74,.25),rgba(120,50,0,.4))}
@@ -93,7 +98,6 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .pk.bulk-selected .bulk-check{background:linear-gradient(180deg,#ff9a4a,#a04a10);border-color:#ffd93b;
   box-shadow:0 0 14px rgba(255,154,74,.9),0 0 0 2px #7a3300;animation:pop .3s ease}
 .pk.bulk-selected .bulk-check::after{content:'✓';color:#fff}
-.pk.bulk-selected .bulk-check.empty::after{content:''}
 .pk.bulk-mode .btn-row{opacity:.4;pointer-events:none}
 .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:6px}
 .upg-btn{display:block;width:100%;padding:7px;border:none;border-radius:8px;
@@ -102,6 +106,7 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .upg-btn:hover{filter:brightness(1.2)}
 .upg-btn:disabled{background:#444;box-shadow:0 2px 0 #222;cursor:not-allowed;opacity:.6}
 .upg-btn.mega-btn{background:linear-gradient(180deg,#ff3b9a,#8a1050);box-shadow:0 2px 0 #4a0028;cursor:not-allowed}
+.upg-btn.dewa-btn{background:linear-gradient(135deg,#ffd700,#ff8c00);color:#1a0800;box-shadow:0 2px 0 #7a5500;cursor:not-allowed;text-shadow:0 0 4px rgba(255,255,255,.5)}
 .sell-btn{display:block;width:100%;padding:7px;border:none;border-radius:8px;
   background:linear-gradient(180deg,#e74c3c,#8a1a10);color:#fff;font-weight:900;font-size:11px;cursor:pointer;
   box-shadow:0 2px 0 #4a0505;letter-spacing:.5px}
@@ -130,10 +135,54 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .sprite-big.attacking.attacker-me{animation:lungeMe .55s cubic-bezier(.4,1.6,.6,1)}
 @keyframes lungeOpp{0%{transform:translate(0,0) scale(1);filter:drop-shadow(0 12px 14px rgba(0,0,0,.75))}20%{transform:translate(10px,-8px) scale(1.05) rotate(3deg)}45%{transform:translate(-60px,35px) scale(1.18);filter:drop-shadow(0 0 22px #fff) brightness(1.6)}55%{transform:translate(-55px,32px) scale(1.15);filter:drop-shadow(0 0 22px #fff) brightness(1.4)}100%{transform:translate(0,0) scale(1);filter:drop-shadow(0 12px 14px rgba(0,0,0,.75))}}
 @keyframes lungeMe{0%{transform:scaleX(-1) translate(0,0) scale(1);filter:drop-shadow(0 12px 14px rgba(0,0,0,.75))}20%{transform:scaleX(-1) translate(10px,-8px) scale(1.05) rotate(-3deg)}45%{transform:scaleX(-1) translate(-60px,-35px) scale(1.18);filter:drop-shadow(0 0 22px #fff) brightness(1.6)}55%{transform:scaleX(-1) translate(-55px,-32px) scale(1.15);filter:drop-shadow(0 0 22px #fff) brightness(1.4)}100%{transform:scaleX(-1) translate(0,0) scale(1);filter:drop-shadow(0 12px 14px rgba(0,0,0,.75))}}
-.sprite-big.hurt{animation:hurtAnim .5s ease}
-.sprite-big.hurt-flip{animation:hurtAnimFlip .5s ease}
-@keyframes hurtAnim{0%,100%{filter:none;transform:translate(0,0)}15%{filter:brightness(4) hue-rotate(-40deg) saturate(3);transform:translate(-8px,0) scale(.95)}35%{filter:brightness(2.5) hue-rotate(-30deg);transform:translate(8px,0) scale(.98)}55%{filter:brightness(1.5);transform:translate(-5px,0) scale(1)}75%{transform:translate(5px,0)}}
-@keyframes hurtAnimFlip{0%,100%{filter:none;transform:scaleX(-1) translate(0,0)}15%{filter:brightness(4) hue-rotate(-40deg) saturate(3);transform:scaleX(-1) translate(-8px,0) scale(.95)}35%{filter:brightness(2.5) hue-rotate(-30deg);transform:scaleX(-1) translate(8px,0) scale(.98)}55%{filter:brightness(1.5);transform:scaleX(-1) translate(-5px,0) scale(1)}75%{transform:scaleX(-1) translate(5px,0)}}
+.sprite-big.hurt{animation:hurtKnockbackOpp .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes hurtKnockbackOpp{
+  0%   { transform: translate(0,0) rotate(0); filter: none; }
+  15%  { transform: translate(15px,0) rotate(3deg) scale(.98);
+         filter: brightness(4) hue-rotate(-40deg) saturate(3); }
+  35%  { transform: translate(30px,0) rotate(6deg) scale(.96);
+         filter: brightness(2.5) hue-rotate(-30deg); }
+  55%  { transform: translate(20px,0) rotate(4deg) scale(.98);
+         filter: brightness(1.5); }
+  75%  { transform: translate(8px,0) rotate(1.5deg) scale(1); }
+  100% { transform: translate(0,0) rotate(0) scale(1); filter: none; }
+}
+.sprite-big.hurt-flip{animation:hurtKnockbackMe .5s cubic-bezier(.3,1.4,.5,1)}
+@keyframes hurtKnockbackMe{
+  0%   { transform: scaleX(-1) translate(0,0) rotate(0); filter: none; }
+  15%  { transform: scaleX(-1) translate(15px,0) rotate(-3deg) scale(.98);
+         filter: brightness(4) hue-rotate(-40deg) saturate(3); }
+  35%  { transform: scaleX(-1) translate(30px,0) rotate(-6deg) scale(.96);
+         filter: brightness(2.5) hue-rotate(-30deg); }
+  55%  { transform: scaleX(-1) translate(20px,0) rotate(-4deg) scale(.98);
+         filter: brightness(1.5); }
+  75%  { transform: scaleX(-1) translate(8px,0) rotate(-1.5deg) scale(1); }
+  100% { transform: scaleX(-1) translate(0,0) rotate(0) scale(1); filter: none; }
+}
+.sprite-big.hurt.crit{animation:hurtKnockbackOppCrit .6s cubic-bezier(.3,1.4,.5,1)}
+@keyframes hurtKnockbackOppCrit{
+  0%   { transform: translate(0,0) rotate(0); filter: none; }
+  15%  { transform: translate(30px,-5px) rotate(7deg) scale(.96);
+         filter: brightness(5) hue-rotate(-50deg) saturate(4); }
+  35%  { transform: translate(60px,-8px) rotate(12deg) scale(.92);
+         filter: brightness(3) hue-rotate(-40deg); }
+  55%  { transform: translate(40px,-5px) rotate(8deg) scale(.95);
+         filter: brightness(2); }
+  75%  { transform: translate(15px,-2px) rotate(3deg) scale(1); }
+  100% { transform: translate(0,0) rotate(0) scale(1); filter: none; }
+}
+.sprite-big.hurt-flip.crit{animation:hurtKnockbackMeCrit .6s cubic-bezier(.3,1.4,.5,1)}
+@keyframes hurtKnockbackMeCrit{
+  0%   { transform: scaleX(-1) translate(0,0) rotate(0); filter: none; }
+  15%  { transform: scaleX(-1) translate(30px,-5px) rotate(-7deg) scale(.96);
+         filter: brightness(5) hue-rotate(-50deg) saturate(4); }
+  35%  { transform: scaleX(-1) translate(60px,-8px) rotate(-12deg) scale(.92);
+         filter: brightness(3) hue-rotate(-40deg); }
+  55%  { transform: scaleX(-1) translate(40px,-5px) rotate(-8deg) scale(.95);
+         filter: brightness(2); }
+  75%  { transform: scaleX(-1) translate(15px,-2px) rotate(-3deg) scale(1); }
+  100% { transform: scaleX(-1) translate(0,0) rotate(0) scale(1); filter: none; }
+}
 .sprite-big.faint{animation:faintAnim .8s ease forwards}
 @keyframes faintAnim{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(60px) rotate(90deg)}}
 .me .sprite-big.faint{animation:faintAnimFlip .8s ease forwards}
@@ -173,6 +222,7 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .modal.win{border-color:#2ecc71;box-shadow:0 20px 60px rgba(0,0,0,.9),0 0 60px rgba(46,204,113,.4)}
 .modal.lose{border-color:#e74c3c;box-shadow:0 20px 60px rgba(0,0,0,.9),0 0 60px rgba(231,76,60,.4)}
 .modal.sell{border-color:#ff9a4a;box-shadow:0 20px 60px rgba(0,0,0,.9),0 0 60px rgba(255,154,74,.5)}
+.modal.dewa{border-color:#ffd700;box-shadow:0 20px 60px rgba(0,0,0,.9),0 0 80px rgba(255,215,0,.7),0 0 120px rgba(255,140,0,.4)}
 .input-wrap{position:relative;margin:10px 0}
 .input-wrap input{width:100%;padding:14px 44px 14px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.25);
   background:rgba(0,0,0,.5);color:#fff;font-size:16px;font-weight:700;letter-spacing:1px;outline:none}
@@ -193,25 +243,32 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
   border:2px solid #ffd93b;border-radius:14px;padding:14px 22px;font-weight:800;color:#ffd93b;
   z-index:300;opacity:0;pointer-events:none;transition:all .35s;text-align:center;max-width:80vw}
 .toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.toast.dewa{border-color:#ffd700;color:#ffd700;box-shadow:0 0 30px rgba(255,215,0,.6);background:rgba(40,20,0,.95)}
 .stat-line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.12);font-size:14px;gap:10px;align-items:center}
 .stat-line span:last-child{font-weight:800;color:#ffd93b}
 .gacha-anim{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:200;flex-direction:column;gap:20px;padding:20px}
 .gacha-anim.show{display:flex}
 .gacha-anim.mega-show{background:radial-gradient(circle,rgba(255,59,154,.4),rgba(0,0,0,.95))}
+.gacha-anim.dewa-show{background:radial-gradient(circle,rgba(255,215,0,.5),rgba(40,20,0,.98))}
 .gacha-box{font-size:80px;animation:shake .35s infinite}
 @keyframes shake{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(-8px,4px) rotate(-6deg)}75%{transform:translate(8px,-4px) rotate(6deg)}}
 .gacha-reveal{font-size:90px;animation:pop .6s ease;text-align:center;display:inline-block}
 .gacha-reveal.mega-reveal{animation:megaPop .9s ease;filter:drop-shadow(0 0 30px #ff3b9a) drop-shadow(0 0 50px #ff6b00)}
 @keyframes megaPop{0%{transform:scale(0) rotate(-360deg);opacity:0}60%{transform:scale(1.4) rotate(20deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+.gacha-reveal.dewa-reveal{animation:dewaPop 1.2s ease;filter:drop-shadow(0 0 40px #ffd700) drop-shadow(0 0 80px #ff8c00) drop-shadow(0 0 120px #ffd700)}
+@keyframes dewaPop{0%{transform:scale(0) rotate(-720deg);opacity:0}50%{transform:scale(1.6) rotate(30deg);opacity:1}80%{transform:scale(1.2) rotate(-10deg)}100%{transform:scale(1) rotate(0);opacity:1}}
 @keyframes pop{0%{transform:scale(0) rotate(-180deg);opacity:0}70%{transform:scale(1.2) rotate(10deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
 .hint{font-size:11px;opacity:.6;text-align:center;margin-top:6px}
 .price-badge{display:inline-block;background:rgba(255,215,0,.2);color:#ffd93b;padding:2px 8px;border-radius:8px;font-weight:900;font-size:12px;margin-left:6px}
-.team-counter{background:rgba(0,0,0,.6);border:1px solid rgba(255,215,0,.5);padding:4px 10px;border-radius:10px;font-size:12px;font-weight:800;color:#ffd93b;display:inline-block;margin-left:8px}
+.price-badge.dewa{background:linear-gradient(135deg,rgba(255,215,0,.4),rgba(255,140,0,.3));color:#fff;text-shadow:0 0 6px rgba(255,215,0,.8)}
 .reward-amount{font-size:36px;font-weight:900;color:#ffd93b;text-shadow:0 0 20px rgba(255,200,0,.8);text-align:center;margin:12px 0;animation:rewardPulse 1.2s ease-in-out infinite}
 @keyframes rewardPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 .sell-amount{font-size:32px;font-weight:900;color:#ff9a4a;text-shadow:0 0 20px rgba(255,154,74,.8);text-align:center;margin:12px 0}
 .mega-glow{animation:megaGlow 1.5s ease-in-out infinite}
 @keyframes megaGlow{0%,100%{filter:drop-shadow(0 0 12px #ff3b9a)}50%{filter:drop-shadow(0 0 28px #ff3b9a) drop-shadow(0 0 40px #ff6b00)}}
+.dewa-glow{animation:dewaGlow 2s ease-in-out infinite}
+@keyframes dewaGlow{0%,100%{filter:drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 30px #ff8c00)}
+  50%{filter:drop-shadow(0 0 40px #ffd700) drop-shadow(0 0 80px #ff8c00) drop-shadow(0 0 120px #ffd700) brightness(1.3)}}
 .rate-list{display:grid;gap:6px;margin-top:8px}
 .rate-item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);font-size:13px}
 .rate-item .pct{font-weight:900;color:#ffd93b;font-size:15px}
@@ -231,6 +288,8 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
   box-shadow:0 0 16px rgba(46,204,113,.4)}
 .team-slot.filled.mega-slot{border-color:#ff3b9a;background:rgba(255,59,154,.15);
   box-shadow:0 0 20px rgba(255,59,154,.5)}
+.team-slot.filled.dewa-slot{border-color:#ffd700;background:rgba(255,215,0,.2);
+  box-shadow:0 0 25px rgba(255,215,0,.7),0 0 50px rgba(255,140,0,.3)}
 .team-slot .sprite-sm{font-size:28px;animation:idle 2s ease-in-out infinite}
 .team-slot .slot-label{font-size:8px;opacity:.6;position:absolute;top:3px;left:5px;font-weight:800}
 .team-slot .slot-name{font-size:9px;font-weight:800;text-align:center;line-height:1.1;margin-top:2px;padding:0 2px}
@@ -238,6 +297,7 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .team-slot .empty-icon{font-size:26px;opacity:.3}
 .team-slot .empty-text{font-size:9px;opacity:.5;margin-top:2px}
 .team-slot.mega-slot .slot-name{color:#ff3b9a}
+.team-slot.dewa-slot .slot-name{color:#ffd700;text-shadow:0 0 8px rgba(255,215,0,.8)}
 .lock-badge{display:inline-block;background:linear-gradient(180deg,#2ecc71,#1a7d42);color:#fff;
   padding:4px 12px;border-radius:10px;font-weight:900;font-size:11px;letter-spacing:1px;
   box-shadow:0 3px 0 #0a3d1f,0 0 12px rgba(46,204,113,.6)}
@@ -249,6 +309,8 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .gacha-stat-box .num{font-size:24px;font-weight:900;color:#ffd93b;text-shadow:0 0 12px rgba(255,200,0,.6);margin-top:4px}
 .gacha-stat-box.mega{border-color:#ff3b9a}
 .gacha-stat-box.mega .num{color:#ff3b9a;text-shadow:0 0 12px rgba(255,59,154,.6)}
+.gacha-stat-box.dewa{border-color:#ffd700;background:linear-gradient(135deg,rgba(255,215,0,.15),rgba(255,140,0,.1))}
+.gacha-stat-box.dewa .num{color:#ffd700;text-shadow:0 0 15px rgba(255,215,0,.9),0 0 30px rgba(255,140,0,.5)}
 .bulk-bar{display:none;position:sticky;top:0;z-index:15;background:linear-gradient(180deg,#2a1a0a,#1a0a00);
   border:2px solid #ff9a4a;border-radius:14px;padding:10px 12px;margin-bottom:10px;
   box-shadow:0 6px 20px rgba(255,154,74,.4),0 0 40px rgba(255,154,74,.2)}
@@ -260,7 +322,6 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .bulk-bar .row2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .bulk-bar .row2 .btn{margin:0;padding:10px;font-size:13px}
 .bulk-hint{font-size:11px;opacity:.75;text-align:center;margin-top:6px;color:#ffb07a}
-/* ✅ v2.9.4: Avatar TIDAK bergerak saat diklik — hapus transition & :active */
 .avatar-secret{position:relative;display:inline-block;cursor:pointer;user-select:none;-webkit-user-select:none}
 .owner-input{
   width:100%;padding:12px 14px;border-radius:10px;
@@ -271,9 +332,172 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 .owner-input::placeholder{color:rgba(255,215,0,.4);font-weight:600;font-size:13px}
 .input-with-btn{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;margin:6px 0}
 .input-with-btn .btn{margin:0;padding:10px 16px;font-size:13px;white-space:nowrap}
-.owner-row{display:flex;gap:6px;align-items:center;margin:8px 0;flex-wrap:wrap}
-.owner-row label{font-size:12px;font-weight:800;color:#b0d0ff;flex:0 0 auto}
 .owner-stat-label{font-size:13px;font-weight:800;color:#ffd93b;margin-bottom:4px;display:block}
+.btn.dewa-btn{background:linear-gradient(180deg,#ffd700,#b36900);
+  box-shadow:0 4px 0 #5c3300,0 8px 25px rgba(255,215,0,.6),0 0 60px rgba(255,215,0,.3);
+  color:#1a1000;font-weight:900;letter-spacing:2px;text-shadow:0 1px 0 rgba(255,255,255,.4);
+  animation:dewaBtn 2.5s ease-in-out infinite}
+@keyframes dewaBtn{0%,100%{box-shadow:0 4px 0 #5c3300,0 8px 25px rgba(255,215,0,.6),0 0 60px rgba(255,215,0,.3)}
+  50%{box-shadow:0 4px 0 #5c3300,0 8px 35px rgba(255,215,0,.9),0 0 100px rgba(255,215,0,.5)}}
+.btn.dewa-btn:hover{filter:brightness(1.15)}
+#screen-gacha-dewa .dewa-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+#screen-gacha-dewa .dewa-bg::before{content:"✨";position:absolute;top:10%;left:5%;font-size:24px;opacity:.6;animation:sparkle1 4s ease-in-out infinite}
+#screen-gacha-dewa .dewa-bg::after{content:"⭐";position:absolute;top:20%;right:8%;font-size:30px;opacity:.7;animation:sparkle2 3.5s ease-in-out infinite}
+@keyframes sparkle1{0%,100%{transform:translate(0,0) rotate(0);opacity:.3}50%{transform:translate(30px,20px) rotate(180deg);opacity:.9}}
+@keyframes sparkle2{0%,100%{transform:translate(0,0) scale(1);opacity:.5}50%{transform:translate(-20px,30px) scale(1.4);opacity:1}}
+#screen-gacha-dewa .screen-content{position:relative;z-index:1}
+.dewa-title{text-align:center;font-size:clamp(24px,6vw,42px);font-weight:900;letter-spacing:4px;
+  background:linear-gradient(180deg,#fff7b0,#ffd700 40%,#ff8c00 80%,#b36900);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 20px rgba(255,215,0,.8)) drop-shadow(0 0 40px rgba(255,140,0,.5)) drop-shadow(0 4px 0 rgba(120,60,0,.7));
+  margin:8px 0;animation:dewaTitle 3s ease-in-out infinite}
+@keyframes dewaTitle{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.dewa-header{text-align:center;font-size:64px;margin:4px 0;animation:dewaFloat 3s ease-in-out infinite;
+  filter:drop-shadow(0 0 25px #ffd700) drop-shadow(0 0 50px #ff8c00)}
+@keyframes dewaFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-12px) rotate(5deg)}}
+.custom-gacha-box{
+  margin-top:10px;padding:12px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(255,215,0,.12),rgba(255,140,0,.05));
+  border:2px solid rgba(255,215,0,.5);
+  box-shadow:0 0 25px rgba(255,215,0,.25);
+}
+.custom-gacha-box .cg-title{
+  font-size:12px;font-weight:900;color:#ffd93b;
+  text-align:center;letter-spacing:2px;margin-bottom:8px;
+  text-shadow:0 0 10px rgba(255,215,0,.6);
+}
+.custom-gacha-box .cg-row{
+  display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;
+}
+.custom-gacha-box input{
+  width:100%;padding:12px 14px;border-radius:10px;
+  border:2px solid rgba(255,215,0,.5);
+  background:rgba(0,0,0,.6);color:#ffd93b;
+  font-size:18px;font-weight:900;letter-spacing:1px;
+  outline:none;text-align:center;
+  font-family:'Courier New',monospace;
+}
+.custom-gacha-box input:focus{
+  border-color:#ffd93b;
+  box-shadow:0 0 0 3px rgba(255,215,0,.25);
+}
+.custom-gacha-box input::placeholder{
+  color:rgba(255,215,0,.4);font-weight:600;font-size:13px;
+}
+.custom-gacha-box .cg-btn{
+  padding:12px 20px;border:none;border-radius:10px;
+  background:linear-gradient(180deg,#ffd700,#b36900);
+  color:#1a1000;font-weight:900;font-size:14px;letter-spacing:1px;
+  cursor:pointer;white-space:nowrap;
+  box-shadow:0 3px 0 #5c3300,0 6px 18px rgba(255,215,0,.4);
+}
+.custom-gacha-box .cg-btn:hover{filter:brightness(1.15);transform:translateY(-2px)}
+.custom-gacha-box .cg-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #5c3300}
+.custom-gacha-box .cg-hint{
+  font-size:10px;opacity:.7;text-align:center;margin-top:6px;color:#ffd93b;
+}
+.custom-gacha-box.dewa{
+  border-color:#ffd700;
+  background:linear-gradient(180deg,rgba(255,215,0,.2),rgba(255,140,0,.1));
+  box-shadow:0 0 35px rgba(255,215,0,.4);
+}
+.custom-gacha-box.dewa input{
+  border-color:#ffd700;color:#ffd700;
+}
+.custom-gacha-box.dewa .cg-title{
+  color:#ffd700;
+  text-shadow:0 0 15px rgba(255,215,0,.8);
+}
+/* ✅ v3.1.2: Modal Konfirmasi Custom Game */
+.confirm-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;z-index:400;padding:16px;
+}
+.confirm-bg.show{display:flex;animation:confirmFadeIn .25s ease}
+@keyframes confirmFadeIn{from{opacity:0}to{opacity:1}}
+.confirm-box{
+  background:linear-gradient(180deg,#1e1e4a,#0a0a20);
+  border:3px solid #ffd93b;border-radius:22px;
+  padding:26px 22px;max-width:440px;width:100%;
+  box-shadow:0 25px 80px rgba(0,0,0,.95),
+             0 0 0 1px rgba(255,215,0,.4) inset,
+             0 0 60px rgba(255,215,0,.35);
+  animation:confirmPop .35s cubic-bezier(.3,1.5,.5,1);
+  position:relative;overflow:hidden;
+}
+.confirm-box::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:conic-gradient(from 0deg,transparent,rgba(255,215,0,.15),transparent 30%);
+  animation:confirmShine 4s linear infinite;pointer-events:none;
+}
+@keyframes confirmShine{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes confirmPop{
+  0%{transform:scale(.7) translateY(20px);opacity:0}
+  60%{transform:scale(1.05) translateY(-5px);opacity:1}
+  100%{transform:scale(1) translateY(0);opacity:1}
+}
+.confirm-icon{
+  font-size:70px;text-align:center;margin-bottom:12px;
+  animation:confirmIconFloat 2s ease-in-out infinite;
+  filter:drop-shadow(0 0 20px rgba(255,215,0,.7));
+  line-height:1;
+}
+@keyframes confirmIconFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-8px) scale(1.05)}
+}
+.confirm-title{
+  text-align:center;font-size:22px;font-weight:900;
+  letter-spacing:3px;margin-bottom:14px;
+  color:#ffd93b;
+  text-shadow:0 0 15px rgba(255,215,0,.8),0 0 30px rgba(255,140,0,.4);
+}
+.confirm-message{
+  text-align:center;font-size:14px;line-height:1.6;
+  color:#fff;margin-bottom:18px;opacity:.95;
+  padding:12px 8px;
+  background:rgba(0,0,0,.35);border-radius:12px;
+  border:1px solid rgba(255,255,255,.1);
+}
+.confirm-info{
+  display:flex;flex-direction:column;gap:6px;margin-bottom:18px;
+  background:rgba(0,0,0,.4);border-radius:12px;padding:12px;
+  border:1px solid rgba(255,215,0,.2);
+}
+.confirm-info .ci-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.08);
+}
+.confirm-info .ci-row:last-child{border-bottom:none}
+.confirm-info .ci-label{opacity:.8;font-weight:700}
+.confirm-info .ci-value{font-weight:900;color:#ffd93b;text-shadow:0 0 10px rgba(255,215,0,.5)}
+.confirm-actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;
+}
+.confirm-actions .btn{
+  margin:0;padding:14px 12px;font-size:14px;font-weight:900;
+  letter-spacing:1px;
+}
+.confirm-box.danger{border-color:#ff4a4a;
+  box-shadow:0 25px 80px rgba(0,0,0,.95),0 0 0 1px rgba(255,74,74,.4) inset,0 0 60px rgba(255,74,74,.35);}
+.confirm-box.danger .confirm-title{color:#ff7a7a;
+  text-shadow:0 0 15px rgba(255,74,74,.8),0 0 30px rgba(200,0,0,.4);}
+.confirm-box.danger .confirm-icon{filter:drop-shadow(0 0 20px rgba(255,74,74,.7));}
+.confirm-box.success{border-color:#2ecc71;
+  box-shadow:0 25px 80px rgba(0,0,0,.95),0 0 0 1px rgba(46,204,113,.4) inset,0 0 60px rgba(46,204,113,.35);}
+.confirm-box.success .confirm-title{color:#7cff7a;
+  text-shadow:0 0 15px rgba(46,204,113,.8);}
+.confirm-box.success .confirm-icon{filter:drop-shadow(0 0 20px rgba(46,204,113,.7));}
+.confirm-box.warn{border-color:#ff9a4a;
+  box-shadow:0 25px 80px rgba(0,0,0,.95),0 0 0 1px rgba(255,154,74,.4) inset,0 0 60px rgba(255,154,74,.4);}
+.confirm-box.warn .confirm-title{color:#ffb07a;
+  text-shadow:0 0 15px rgba(255,154,74,.8);}
+.confirm-box.warn .confirm-icon{filter:drop-shadow(0 0 20px rgba(255,154,74,.7));}
+.confirm-box.dewa{border-color:#ffd700;
+  box-shadow:0 25px 80px rgba(0,0,0,.95),0 0 0 1px rgba(255,215,0,.6) inset,0 0 80px rgba(255,215,0,.5);}
+.confirm-box.dewa .confirm-title{color:#ffd700;
+  text-shadow:0 0 20px rgba(255,215,0,.9),0 0 40px rgba(255,140,0,.5);}
+.confirm-box.dewa .confirm-icon{filter:drop-shadow(0 0 25px rgba(255,215,0,.9));}
 @media(max-width:520px){
   .menu-buttons{max-width:100%}
   .hp-box{width:44vw}
@@ -285,6 +509,13 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
   .top-bar h2{font-size:16px;letter-spacing:1px}
   .input-with-btn{grid-template-columns:1fr}
   .input-with-btn .btn{width:100%}
+  .custom-gacha-box .cg-row{grid-template-columns:1fr}
+  .custom-gacha-box .cg-btn{width:100%}
+  .confirm-box{padding:20px 16px;border-radius:18px}
+  .confirm-icon{font-size:56px}
+  .confirm-title{font-size:18px;letter-spacing:2px}
+  .confirm-message{font-size:13px}
+  .confirm-actions .btn{padding:12px 8px;font-size:13px}
 }
 </style>
 </head>
@@ -295,12 +526,13 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
   <!-- MENU -->
   <div id="screen-menu" class="screen active">
     <h1 class="title">⚡ POKEMON BATTLE 2D ⚡</h1>
-    <p class="subtitle">OWNER: GERENO — v2.9.4</p>
+    <p class="subtitle">OWNER: GERENO — v3.1.2</p>
     <div class="menu-buttons">
       <button class="btn" data-snd="confirm" onclick="goBattle()">⚔️ BATTLE ARENA</button>
       <button class="btn pink" data-snd="confirm" onclick="go('team-setup')">🎯 SET POKEMON BATTLE</button>
       <button class="btn" data-snd="confirm" onclick="go('deck')">🎴 DECK POKEMON</button>
-      <button class="btn gold" data-snd="coin" onclick="go('gacha')">🎁 GACHA POKEMON</button>
+      <button class="btn gold" data-snd="coin" onclick="go('gacha')">🎁 GACHA POKEMON - MEGA</button>
+      <button class="btn dewa-btn" data-snd="coin" onclick="go('gacha-dewa')">🌟 GACHA POKEMON - DEWA</button>
       <button class="btn" data-snd="confirm" onclick="go('profile')">👤 PROFILE</button>
       <button class="btn" data-snd="click" onclick="go('settings')">⚙️ PENGATURAN</button>
     </div>
@@ -406,11 +638,11 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
     <div id="deckList" class="pk-grid"></div>
   </div>
 
-  <!-- GACHA -->
+  <!-- GACHA MEGA -->
   <div id="screen-gacha" class="screen">
     <div class="top-bar">
       <button class="btn small back" data-snd="cancel" onclick="go('menu')">← Kembali</button>
-      <h2>🎁 GACHA POKEMON</h2>
+      <h2>🎁 GACHA POKEMON - MEGA</h2>
     </div>
     <div class="card" style="text-align:center">
       <div style="font-size:56px">🎰</div>
@@ -444,6 +676,14 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
       <button class="btn cyan" data-snd="coin" onclick="pullGacha(100)" style="width:100%">
         🎰 GACHA 100x <span class="price-badge">250.000 💰</span>
       </button>
+      <div class="custom-gacha-box">
+        <div class="cg-title">⚙️ CUSTOM JUMLAH GACHA</div>
+        <div class="cg-row">
+          <input type="number" id="customGachaMegaInput" min="1" max="100000" placeholder="Ketik jumlah (1-100.000)..." value="1">
+          <button class="cg-btn" data-snd="coin" onclick="pullGachaCustom('mega')">🎰 GACHA</button>
+        </div>
+        <div class="cg-hint" id="customGachaMegaHint">💰 1× = 2.500 coin</div>
+      </div>
       <button class="btn success" data-snd="confirm" onclick="go('deck')" style="width:100%;margin-top:10px">📦 LIHAT DECK</button>
     </div>
     <div class="card">
@@ -454,6 +694,81 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
         <div class="rate-item"><span>💰 700 Coin</span><span class="pct">24%</span></div>
         <div class="rate-item"><span>🎁 Pokemon Biasa</span><span class="pct">1%</span></div>
         <div class="rate-item" style="border-color:#ff3b9a"><span>💎 <b style="color:#ff3b9a">MEGA Pokemon</b> (tiap 3000×)</span><span class="pct" style="color:#ff3b9a">Guaranteed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GACHA DEWA -->
+  <div id="screen-gacha-dewa" class="screen">
+    <div class="dewa-bg"></div>
+    <div class="screen-content">
+      <div class="top-bar">
+        <button class="btn small back" data-snd="cancel" onclick="go('menu')">← Kembali</button>
+        <h2 style="color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,.8)">🌟 GACHA POKEMON - DEWA</h2>
+      </div>
+      <div class="card" style="text-align:center;border-color:#ffd700;box-shadow:0 0 40px rgba(255,215,0,.4),0 0 80px rgba(255,140,0,.2)">
+        <div class="dewa-header">🌟</div>
+        <div class="dewa-title">DEWA GACHA</div>
+        <p style="font-size:13px;opacity:.9;margin:8px 0 12px;color:#ffd700;font-weight:700">
+          Gacha tingkat DEWA! Setiap <b style="color:#fff;text-shadow:0 0 10px #ffd700">15.000×</b> dijamin <b style="color:#fff;text-shadow:0 0 10px #ffd700">POKEMON DEWA</b>!
+        </p>
+        <div class="gacha-stats">
+          <div class="gacha-stat-box dewa">
+            <div class="lbl">🌟 Total Gacha DEWA</div>
+            <div class="num" id="gachaDewaTotalDisplay">0</div>
+          </div>
+          <div class="gacha-stat-box dewa">
+            <div class="lbl">🌟 Ke DEWA</div>
+            <div class="num" id="gachaDewaRemain">15.000</div>
+          </div>
+        </div>
+        <div style="font-size:10px;opacity:.7;margin-top:-4px;margin-bottom:8px;color:#ffd700">
+          Progress: <b id="gachaDewaCounter">0</b> / 15.000
+        </div>
+        <div class="skip-row" onclick="toggleSkipAnim()" style="border-color:rgba(255,215,0,.6)">
+          <input type="checkbox" id="skipAnimCheckDewa" onchange="event.stopPropagation();toggleSkipAnim()" onclick="event.stopPropagation()">
+          <label for="skipAnimCheckDewa" style="color:#ffd700">
+            ⏩ Lewati Animasi Gacha
+            <span class="desc">Hasil langsung didapat tanpa animasi</span>
+          </label>
+        </div>
+        <button class="btn gold" data-snd="coin" onclick="pullGachaDewa(1)" style="width:100%">
+          🌟 GACHA 1x <span class="price-badge dewa">5.000 💰</span>
+        </button>
+        <button class="btn gold" data-snd="coin" onclick="pullGachaDewa(10)" style="width:100%">
+          🌟 GACHA 10x <span class="price-badge dewa">50.000 💰</span>
+        </button>
+        <button class="btn gold" data-snd="coin" onclick="pullGachaDewa(100)" style="width:100%">
+          🌟 GACHA 100x <span class="price-badge dewa">500.000 💰</span>
+        </button>
+        <button class="btn dewa-btn" data-snd="coin" onclick="pullGachaDewa(1000)" style="width:100%">
+          🌟 GACHA 1000x <span class="price-badge dewa">5.000.000 💰</span>
+        </button>
+        <div class="custom-gacha-box dewa">
+          <div class="cg-title">⚙️ CUSTOM JUMLAH GACHA DEWA</div>
+          <div class="cg-row">
+            <input type="number" id="customGachaDewaInput" min="1" max="100000" placeholder="Ketik jumlah (1-100.000)..." value="1">
+            <button class="cg-btn" data-snd="coin" onclick="pullGachaCustom('dewa')">🌟 GACHA</button>
+          </div>
+          <div class="cg-hint" id="customGachaDewaHint">💰 1× = 5.000 coin</div>
+        </div>
+        <button class="btn success" data-snd="confirm" onclick="go('deck')" style="width:100%;margin-top:10px">📦 LIHAT DECK</button>
+      </div>
+      <div class="card" style="border-color:#ffd700;box-shadow:0 0 30px rgba(255,215,0,.3)">
+        <h3 style="font-size:13px;color:#ffd700;margin-bottom:8px;text-shadow:0 0 10px rgba(255,215,0,.6)">📊 RATE REWARD GACHA DEWA</h3>
+        <div class="rate-list">
+          <div class="rate-item"><span>💰 100 Coin</span><span class="pct">50%</span></div>
+          <div class="rate-item"><span>💰 300 Coin</span><span class="pct">25%</span></div>
+          <div class="rate-item"><span>💰 700 Coin</span><span class="pct">24%</span></div>
+          <div class="rate-item"><span>🎁 Pokemon Biasa</span><span class="pct">1%</span></div>
+          <div class="rate-item" style="border-color:#ffd700;background:linear-gradient(135deg,rgba(255,215,0,.15),rgba(255,140,0,.1))">
+            <span>🌟 <b style="color:#ffd700;text-shadow:0 0 10px rgba(255,215,0,.8)">DEWA Pokemon</b> (tiap 15.000×)</span>
+            <span class="pct" style="color:#ffd700;text-shadow:0 0 10px rgba(255,215,0,.8)">Guaranteed</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="text-align:center;font-size:11px;opacity:.8;border-color:rgba(255,215,0,.4)">
+        💡 <b style="color:#ffd700">DEWA</b> memiliki Total Power <b style="color:#ffd700">12.000</b> — Level <b style="color:#ffd700">200</b> (MAX)
       </div>
     </div>
   </div>
@@ -479,7 +794,9 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
       <div class="stat-line"><span>💰 Coin</span><span id="stCoins">0</span></div>
       <div class="stat-line"><span>🎴 Total Pokemon</span><span id="stPok">0</span></div>
       <div class="stat-line"><span>🌟 Mega Pokemon</span><span id="stMega">0</span></div>
-      <div class="stat-line"><span>🎰 Total Gacha</span><span id="stGacha">0</span></div>
+      <div class="stat-line"><span>👑 Dewa Pokemon</span><span id="stDewa">0</span></div>
+      <div class="stat-line"><span>🎰 Total Gacha MEGA</span><span id="stGacha">0</span></div>
+      <div class="stat-line"><span>🌟 Total Gacha DEWA</span><span id="stGachaDewa">0</span></div>
       <div class="stat-line"><span>💸 Total Jual Pokemon</span><span id="stSold">0</span></div>
     </div>
   </div>
@@ -523,7 +840,7 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
       <button class="btn danger" data-snd="cancel" onclick="resetGame()">🗑️ RESET SEMUA DATA</button>
     </div>
     <div class="card" style="text-align:center;font-size:11px;opacity:.7">
-      Pokemon Battle 2D — Owner: GERENO<br><b style="color:#ffd93b">v2.9.4 Build 2026</b>
+      Pokemon Battle 2D — Owner: GERENO<br><b style="color:#ffd93b">v3.1.2 Build 2026</b>
     </div>
   </div>
 
@@ -618,13 +935,20 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 
     <div class="card">
       <h3 style="font-size:13px;color:#ffd93b;margin-bottom:8px">🎰 GACHA COUNTER (Custom)</h3>
-      <div class="stat-line"><span>Total gacha saat ini</span><span id="ownGachaNow">0</span></div>
-      <span class="owner-stat-label">✏️ Set Total Gacha Counter</span>
+      <div class="stat-line"><span>Total Gacha MEGA</span><span id="ownGachaNow">0</span></div>
+      <div class="stat-line"><span>Total Gacha DEWA</span><span id="ownGachaDewaNow">0</span></div>
+      <span class="owner-stat-label">✏️ Set Counter Gacha MEGA</span>
       <div class="input-with-btn">
-        <input type="number" class="owner-input" id="ownGachaInput" placeholder="Ketik angka counter gacha..." min="0">
+        <input type="number" class="owner-input" id="ownGachaInput" placeholder="Ketik angka counter MEGA..." min="0">
         <button class="btn success" data-snd="confirm" onclick="cheatSetGachaCustom()">SET</button>
       </div>
       <button class="btn small purple" data-snd="confirm" onclick="cheatSetGachaNear()" style="width:100%;margin-top:8px">⚡ Set Dekat MEGA (otomatis)</button>
+      <span class="owner-stat-label" style="margin-top:12px">✏️ Set Counter Gacha DEWA</span>
+      <div class="input-with-btn">
+        <input type="number" class="owner-input" id="ownGachaDewaInput" placeholder="Ketik angka counter DEWA..." min="0">
+        <button class="btn success" data-snd="confirm" onclick="cheatSetGachaDewaCustom()">SET</button>
+      </div>
+      <button class="btn small purple" data-snd="confirm" onclick="cheatSetGachaDewaNear()" style="width:100%;margin-top:8px">⚡ Set Dekat DEWA (otomatis)</button>
     </div>
 
     <div class="card">
@@ -649,6 +973,11 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
       <div class="input-with-btn">
         <input type="number" class="owner-input" id="ownGiveMegaInput" placeholder="Ketik jumlah MEGA..." min="1" max="100" value="1">
         <button class="btn pink" data-snd="confirm" onclick="cheatGiveMegaCustom()">GIVE</button>
+      </div>
+      <span class="owner-stat-label" style="color:#ffd700">🌟 Beri DEWA (custom jumlah)</span>
+      <div class="input-with-btn">
+        <input type="number" class="owner-input" id="ownGiveDewaInput" placeholder="Ketik jumlah DEWA..." min="1" max="100" value="1" style="border-color:#ffd700;color:#ffd700">
+        <button class="btn dewa-btn" data-snd="confirm" onclick="cheatGiveDewaCustom()">GIVE</button>
       </div>
 
       <button class="btn small purple" data-snd="confirm" onclick="cheatGiveAllPokemon()" style="width:100%;margin-top:8px">📦 Berikan Semua Spesies (Gratis)</button>
@@ -737,7 +1066,7 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 
 <!-- MODAL HASIL GACHA -->
 <div class="modal-bg" id="gachaResultModal">
-  <div class="modal" style="max-width:460px">
+  <div class="modal" style="max-width:460px" id="gachaResultModalBox">
     <h3 id="grmTitle">🎁 HASIL GACHA</h3>
     <div id="grmSummary" style="text-align:center;font-size:13px;opacity:.9;margin-bottom:10px"></div>
     <div id="grmList" style="max-height:340px;overflow-y:auto;display:grid;gap:6px"></div>
@@ -753,11 +1082,24 @@ h1.title{text-align:center;font-size:clamp(26px,6.5vw,54px);font-weight:900;lett
 
 <div class="toast" id="toast"></div>
 
+<!-- ✅ v3.1.2: Modal Konfirmasi Custom Game -->
+<div class="confirm-bg" id="confirmGameModal">
+  <div class="confirm-box" id="confirmGameBox">
+    <div class="confirm-icon" id="confirmGameIcon">⚠️</div>
+    <div class="confirm-title" id="confirmGameTitle">KONFIRMASI</div>
+    <div class="confirm-message" id="confirmGameMessage">Yakin?</div>
+    <div class="confirm-info" id="confirmGameInfo" style="display:none"></div>
+    <div class="confirm-actions">
+      <button class="btn danger" id="confirmGameNo" data-snd="cancel">❌ BATAL</button>
+      <button class="btn success" id="confirmGameYes" data-snd="confirm">✅ YA</button>
+    </div>
+  </div>
+</div>
 <script>
 /* =========================================================================
-   POKEMON BATTLE 2D — v2.9.4
+   POKEMON BATTLE 2D — v3.1.2
    Owner: GERENO | Build 2026
-   Update: Avatar tidak bergerak saat diklik (fix CSS)
+   Update v3.1.2: Modal konfirmasi custom game (ganti confirm() browser)
    ========================================================================= */
 
 const OWNER_PASSWORD = 'GERENO 02082010';
@@ -766,11 +1108,24 @@ const SECRET_CLICK_WINDOW = 1000;
 const GACHA_1X = 2500;
 const GACHA_10X = 25000;
 const GACHA_100X = 250000;
+const GACHA_DEWA_1X = 5000;
+const GACHA_DEWA_10X = 50000;
+const GACHA_DEWA_100X = 500000;
+const GACHA_DEWA_1000X = 5000000;
+const GACHA_CUSTOM_MIN = 1;
+const GACHA_CUSTOM_MAX = 100000;
 const MAX_TEAM = 4;
 const MAX_LEVEL = 100;
 const MAX_TOTAL_POWER = 1000;
 const MEGA_TOTAL_POWER = 3000;
 const MEGA_GACHA_THRESHOLD = 3000;
+const DEWA_LEVEL = 200;
+const DEWA_TOTAL_POWER = 12000;
+const DEWA_ATK = 4800;
+const DEWA_DEF = 3200;
+const DEWA_HP = 4000;
+const DEWA_GACHA_THRESHOLD = 15000;
+const DEWA_SELL_PRICE = 200000;
 
 const MUSIC_OPTIONS = [
   {id:'menu',    name:'🏠 Menu (Santai)'},
@@ -844,6 +1199,7 @@ const SFX={
   faint:   ()=>{ tone(300,0.3,'sawtooth',0.28); tone(150,0.4,'sawtooth',0.25,0.15); noise(0.3,0.2); },
   switch:  ()=>{ [700,900,1100].forEach((f,i)=>tone(f,0.09,'triangle',0.28,i*0.06)); },
   mega:    ()=>{ [400,600,800,1000,1400,1800,2200,2600].forEach((f,i)=>tone(f,0.14,'square',0.32,i*0.09)); noise(0.8,0.4); },
+  dewa:    ()=>{ [300,450,600,900,1200,1600,2100,2800,3500].forEach((f,i)=>tone(f,0.18,'triangle',0.35,i*0.10)); noise(1.2,0.5); },
   sell:    ()=>{ [1000,800,600,400].forEach((f,i)=>tone(f,0.12,'triangle',0.28,i*0.08)); tone(1400,0.2,'square',0.2,0.35); },
   lock:    ()=>{ [400,600,900].forEach((f,i)=>tone(f,0.15,'square',0.3,i*0.1)); tone(1200,0.25,'triangle',0.25,0.35); },
   unlock:  ()=>{ [900,600,400].forEach((f,i)=>tone(f,0.12,'sawtooth',0.28,i*0.09)); }
@@ -860,7 +1216,8 @@ const MUSIC_PATTERNS = {
   gacha:   { notes:[392,523.25,659.25,783.99,659.25,523.25,440,523.25,587.33,698.46,880,698.46], tempo:220, wave:'sine', bass:110, bassWave:'triangle', sparkle:true },
   victory: { notes:[523.25,659.25,783.99,1046.5,783.99,659.25,523.25,440,392,523.25,659.25,1046.5], tempo:230, wave:'triangle', bass:130.81, bassWave:'sine', echo:true },
   defeat:  { notes:[293.66,277.18,261.63,246.94,233.08,220,207.65,196], tempo:420, wave:'triangle', bass:98, bassWave:'sine', dark:true },
-  owner:   { notes:[174.61,196,220,261.63,220,196,174.61,130.81,155.56,174.61,196,130.81], tempo:280, wave:'sawtooth', bass:65.41, bassWave:'sine', dark:true }
+  owner:   { notes:[174.61,196,220,261.63,220,196,174.61,130.81,155.56,174.61,196,130.81], tempo:280, wave:'sawtooth', bass:65.41, bassWave:'sine', dark:true },
+  dewa:    { notes:[130.81,164.81,196,261.63,329.63,392,523.25,392,329.63,261.63,329.63,523.25], tempo:260, wave:'triangle', bass:65.41, bassWave:'sine', echo:true, sparkle:true }
 };
 function startMusic(type){
   if(currentMusic===type && musicTimer) return;
@@ -887,6 +1244,7 @@ function getMusicForScreen(screen){
   const c = state.settings.musicChoice || DEFAULT_MUSIC_CHOICE;
   if(screen==='battle') return c.battle || 'battle';
   if(screen==='gacha') return c.gacha || 'gacha';
+  if(screen==='gacha-dewa') return c.gacha || 'gacha';
   if(screen==='victory') return c.victory || 'victory';
   if(screen==='defeat') return c.defeat || 'defeat';
   if(screen==='owner') return c.owner || 'owner';
@@ -894,10 +1252,13 @@ function getMusicForScreen(screen){
 }
 
 const DEFAULT_UPGRADE_COST=5000, UPGRADE_STEP=500, START_CAP=10;
-const LS_KEY='pokemon_battle_2d_gereno_v2';
+const LS_KEY='pokemon_battle_2d_gereno_v3';
+const LS_KEY_OLD_V2='pokemon_battle_2d_gereno_v2';
+const LS_KEY_OLD_V1='pokemon_battle_2d_gereno_v1';
 let state = {
   profile:{ name:'Trainer Gereno', coins:5000, wins:0, losses:0, sold:0 },
   deck:[], deckCap:START_CAP, upgradeCost:DEFAULT_UPGRADE_COST, freeUpgrade:false, gachaCount:0,
+  gachaDewaCount: 0,
   battleTeam:[],
   battleTeamLocked:false,
   settings:{
@@ -916,10 +1277,16 @@ function load(){
   try{
     const raw=localStorage.getItem(LS_KEY);
     if(!raw){
-      const rawV1 = localStorage.getItem('pokemon_battle_2d_gereno_v1');
-      if(!rawV1) return false;
-      Object.assign(state, JSON.parse(rawV1));
-      state.gachaCount = 0;
+      const rawV2 = localStorage.getItem(LS_KEY_OLD_V2);
+      const rawV1 = localStorage.getItem(LS_KEY_OLD_V1);
+      if(rawV2){
+        Object.assign(state, JSON.parse(rawV2));
+        state.gachaDewaCount = 0;
+      } else if(rawV1){
+        Object.assign(state, JSON.parse(rawV1));
+        state.gachaCount = 0;
+        state.gachaDewaCount = 0;
+      } else return false;
     } else {
       Object.assign(state, JSON.parse(raw));
     }
@@ -940,14 +1307,16 @@ function load(){
     if(typeof state.profile.sold !== 'number') state.profile.sold = 0;
     if(!Array.isArray(state.deck)) state.deck=[];
     if(typeof state.gachaCount !== 'number') state.gachaCount = 0;
+    if(typeof state.gachaDewaCount !== 'number') state.gachaDewaCount = 0;
     if(typeof state.settings.skipGachaAnim !== 'boolean') state.settings.skipGachaAnim = false;
     if(!Array.isArray(state.battleTeam)) state.battleTeam = [];
     if(typeof state.battleTeamLocked !== 'boolean') state.battleTeamLocked = false;
     state.deck.forEach(pk=>{
       if(pk.isMega===undefined) pk.isMega = false;
+      if(pk.isDewa===undefined) pk.isDewa = false;
       if(typeof pk.atkBase !== 'number'){
         const sp = POKEMON_POOL.find(p=>p.name===pk.name) ||
-                   POKEMON_POOL.find(p=>p.name===pk.name.replace(' - MEGA',''));
+                   POKEMON_POOL.find(p=>p.name===pk.name.replace(' - MEGA','').replace(' - DEWA',''));
         pk.atkBase = sp ? sp.atk : Math.max(10, Math.round(pk.attack / (1 + (pk.level-1)*0.06)));
         pk.defBase = sp ? sp.def : Math.max(10, Math.round(pk.defense / (1 + (pk.level-1)*0.06)));
         pk.hpBase  = sp ? sp.hp  : Math.max(10, Math.round((pk.maxHp-30) / (1 + (pk.level-1)*0.06)));
@@ -1008,13 +1377,23 @@ const MEGA_POOL=[
   {name:'Greninja', type:'Water', emoji:'🐸', atkBase:95, defBase:67, hpBase:72},
   {name:'Snorlax', type:'Normal', emoji:'😴', atkBase:110, defBase:65, hpBase:160}
 ];
+const DEWA_POOL = [
+  {name:'Arceus',    type:'Cosmic',   emoji:'🌌'},
+  {name:'Dialga',    type:'Time',     emoji:'⏳'},
+  {name:'Palkia',    type:'Space',    emoji:'🌊'},
+  {name:'Giratina',  type:'Void',     emoji:'👻'},
+  {name:'Zeus',      type:'Thunder',  emoji:'⚡'},
+  {name:'Odin',      type:'Divine',   emoji:'🗡️'}
+];
+
 let pkUid=1;
 function makePokemon(species, level){
   const lv = level || (1 + Math.floor(Math.random()*30));
   const pk = {
     uid: 'pk_'+Date.now()+'_'+(pkUid++)+'_'+Math.floor(Math.random()*1e6),
     name: species.name, type: species.type, emoji: species.emoji, rarity: species.rarity||1,
-    level: lv, atkBase: species.atk, defBase: species.def, hpBase: species.hp, isMega:false,
+    level: lv, atkBase: species.atk, defBase: species.def, hpBase: species.hp,
+    isMega:false, isDewa:false,
     attack:0, defense:0, maxHp:0, totalPower:0
   };
   recalcPokemonStats(pk);
@@ -1025,13 +1404,32 @@ function makeMegaPokemon(species){
     uid: 'mega_'+Date.now()+'_'+(pkUid++)+'_'+Math.floor(Math.random()*1e6),
     name: species.name + ' - MEGA',
     type: species.type, emoji: species.emoji, rarity: 5, level: MAX_LEVEL,
-    atkBase: species.atkBase, defBase: species.defBase, hpBase: species.hpBase, isMega: true,
+    atkBase: species.atkBase, defBase: species.defBase, hpBase: species.hpBase,
+    isMega: true, isDewa: false,
+    attack:0, defense:0, maxHp:0, totalPower:0
+  };
+  recalcPokemonStats(pk);
+  return pk;
+}
+function makeDewaPokemon(species){
+  const pk = {
+    uid: 'dewa_'+Date.now()+'_'+(pkUid++)+'_'+Math.floor(Math.random()*1e6),
+    name: species.name + ' - DEWA',
+    type: species.type, emoji: species.emoji, rarity: 7, level: DEWA_LEVEL,
+    atkBase: 0, defBase: 0, hpBase: 0,
+    isMega: false, isDewa: true,
     attack:0, defense:0, maxHp:0, totalPower:0
   };
   recalcPokemonStats(pk);
   return pk;
 }
 function recalcPokemonStats(pk){
+  if(pk.isDewa){
+    pk.level = DEWA_LEVEL;
+    pk.attack = DEWA_ATK; pk.defense = DEWA_DEF; pk.maxHp = DEWA_HP;
+    pk.totalPower = DEWA_TOTAL_POWER;
+    return;
+  }
   if(pk.isMega){
     pk.level = MAX_LEVEL;
     pk.attack = 1200; pk.defense = 800; pk.maxHp = 1000;
@@ -1076,6 +1474,8 @@ function applyCheatStats(pk){
 }
 function sortMegaFirst(deck){
   return [...deck].sort((a,b)=>{
+    if(a.isDewa && !b.isDewa) return -1;
+    if(!a.isDewa && b.isDewa) return 1;
     if(a.isMega && !b.isMega) return -1;
     if(!a.isMega && b.isMega) return 1;
     return 0;
@@ -1083,6 +1483,7 @@ function sortMegaFirst(deck){
 }
 
 function getBasePrice(pk){
+  if(pk.isDewa) return DEWA_SELL_PRICE;
   if(pk.isMega) return 50000;
   let baseByRarity;
   if(pk.rarity === 1) baseByRarity = 500;
@@ -1108,10 +1509,12 @@ function go(screen){
   if(screen==='profile') renderProfile();
   if(screen==='owner'){ renderOwnerPanel(); renderMusicSelects(); }
   if(screen==='settings'){ renderSettings(); renderMusicSelects(); }
-  if(screen==='gacha'){ renderGachaCounter(); renderSkipCheckbox(); }
+  if(screen==='gacha'){ renderGachaCounter(); renderSkipCheckbox(); renderCustomGachaHint('mega'); }
+  if(screen==='gacha-dewa'){ renderGachaDewaCounter(); renderSkipCheckbox(); renderCustomGachaHint('dewa'); }
   if(screen==='battle') startMusic(getMusicForScreen('battle'));
   else if(screen==='owner') startMusic(getMusicForScreen('owner'));
   else if(screen==='gacha') startMusic(getMusicForScreen('gacha'));
+  else if(screen==='gacha-dewa') startMusic(getMusicForScreen('gacha-dewa'));
   else startMusic(getMusicForScreen('menu'));
 }
 function goBattle(){
@@ -1127,6 +1530,10 @@ function toast(msg, dur=1600){
   const t=$('toast'); t.textContent=msg; t.classList.add('show');
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'), dur);
 }
+function toastDewa(msg, dur=2200){
+  const t=$('toast'); t.textContent=msg; t.classList.add('show','dewa');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show','dewa'), dur);
+}
 function updateCoinDisplay(){ $('coinDisplay').textContent = state.profile.coins.toLocaleString('id-ID'); }
 function renderGachaCounter(){
   const total = state.gachaCount || 0;
@@ -1140,12 +1547,43 @@ function renderGachaCounter(){
   const own = $('ownGachaNow');
   if(own) own.textContent = total.toLocaleString('id-ID');
 }
+function renderGachaDewaCounter(){
+  const total = state.gachaDewaCount || 0;
+  const cnt = total % DEWA_GACHA_THRESHOLD;
+  const remain = DEWA_GACHA_THRESHOLD - cnt;
+  const elTotal=$('gachaDewaTotalDisplay');
+  const el1=$('gachaDewaCounter'), el2=$('gachaDewaRemain');
+  if(elTotal) elTotal.textContent = total.toLocaleString('id-ID');
+  if(el1) el1.textContent = cnt.toLocaleString('id-ID');
+  if(el2) el2.textContent = remain.toLocaleString('id-ID');
+  const own = $('ownGachaDewaNow');
+  if(own) own.textContent = total.toLocaleString('id-ID');
+}
+function renderCustomGachaHint(type){
+  if(type==='mega'){
+    const inp = $('customGachaMegaInput');
+    const hint = $('customGachaMegaHint');
+    if(!inp || !hint) return;
+    const n = parseInt(inp.value) || 1;
+    const cost = n * GACHA_1X;
+    hint.textContent = '💰 '+n.toLocaleString('id-ID')+'× = '+cost.toLocaleString('id-ID')+' coin';
+  } else {
+    const inp = $('customGachaDewaInput');
+    const hint = $('customGachaDewaHint');
+    if(!inp || !hint) return;
+    const n = parseInt(inp.value) || 1;
+    const cost = n * GACHA_DEWA_1X;
+    hint.textContent = '💰 '+n.toLocaleString('id-ID')+'× = '+cost.toLocaleString('id-ID')+' coin';
+  }
+}
 document.addEventListener('pointerdown',()=>{ initAudio(); if(state.settings.musicOn && !currentMusic) startMusic(getMusicForScreen('menu')); }, {once:true});
 
 function renderSkipCheckbox(){
   const cb = $('skipAnimCheck');
+  const cbDewa = $('skipAnimCheckDewa');
   const btn = $('btnSkipAnim');
   if(cb) cb.checked = !!state.settings.skipGachaAnim;
+  if(cbDewa) cbDewa.checked = !!state.settings.skipGachaAnim;
   if(btn){
     btn.textContent = state.settings.skipGachaAnim ? 'ON' : 'OFF';
     btn.classList.toggle('success', state.settings.skipGachaAnim);
@@ -1196,8 +1634,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       const currentScreen = document.querySelector('.screen.active');
       if(currentScreen){
         const scr = currentScreen.id.replace('screen-','');
-        const target = (scr==='battle'||scr==='gacha'||scr==='owner') ? scr : 'menu';
-        if(k===target) startMusic(e.target.value);
+        const target = (scr==='battle'||scr==='gacha'||scr==='gacha-dewa'||scr==='owner') ? scr : 'menu';
+        if(k===target || (k==='gacha' && target==='gacha-dewa')) startMusic(e.target.value);
       }
       toast('🎼 Musik '+k+' → '+ (MUSIC_OPTIONS_OWNER.find(m=>m.id===e.target.value)?.name||e.target.value));
     });
@@ -1213,12 +1651,16 @@ document.addEventListener('DOMContentLoaded',()=>{
       const currentScreen = document.querySelector('.screen.active');
       if(currentScreen){
         const scr = currentScreen.id.replace('screen-','');
-        const target = (scr==='battle'||scr==='gacha'||scr==='owner') ? scr : 'menu';
-        if(k===target) startMusic(e.target.value);
+        const target = (scr==='battle'||scr==='gacha'||scr==='gacha-dewa'||scr==='owner') ? scr : 'menu';
+        if(k===target || (k==='gacha' && target==='gacha-dewa')) startMusic(e.target.value);
       }
       toast('🎼 Musik '+k+' → '+ (MUSIC_OPTIONS_OWNER.find(m=>m.id===e.target.value)?.name||e.target.value));
     });
   });
+  const inpMega = $('customGachaMegaInput');
+  if(inpMega) inpMega.addEventListener('input', ()=>renderCustomGachaHint('mega'));
+  const inpDewa = $('customGachaDewaInput');
+  if(inpDewa) inpDewa.addEventListener('input', ()=>renderCustomGachaHint('dewa'));
 });
 function resetMusicChoice(){
   state.settings.musicChoice = Object.assign({}, DEFAULT_MUSIC_CHOICE);
@@ -1228,10 +1670,90 @@ function resetMusicChoice(){
   const currentScreen = document.querySelector('.screen.active');
   if(currentScreen){
     const scr = currentScreen.id.replace('screen-','');
-    const target = (scr==='battle'||scr==='gacha'||scr==='owner') ? scr : 'menu';
+    const target = (scr==='battle'||scr==='gacha'||scr==='gacha-dewa'||scr==='owner') ? scr : 'menu';
     startMusic(getMusicForScreen(target));
   }
 }
+
+/* ============================================================
+   ✅ v3.1.2: MODAL KONFIRMASI CUSTOM GAME
+   Menggantikan confirm() browser dengan modal tema game
+   Return: Promise<boolean> — true kalau YA, false kalau BATAL
+   ============================================================ */
+function confirmGame(options){
+  return new Promise((resolve)=>{
+    const opts = (typeof options === 'string') 
+      ? { message: options } 
+      : (options || {});
+    
+    const icon    = opts.icon || '⚠️';
+    const title   = opts.title || 'KONFIRMASI';
+    const message = opts.message || 'Yakin?';
+    const yesText = opts.yesText || '✅ YA';
+    const noText  = opts.noText || '❌ BATAL';
+    const type    = opts.type || '';
+    const info    = opts.info || null;
+    
+    const bg   = $('confirmGameModal');
+    const box  = $('confirmGameBox');
+    const elIco = $('confirmGameIcon');
+    const elTtl = $('confirmGameTitle');
+    const elMsg = $('confirmGameMessage');
+    const elInf = $('confirmGameInfo');
+    const elYes = $('confirmGameYes');
+    const elNo  = $('confirmGameNo');
+    
+    if(!bg || !box){ resolve(window.confirm(message)); return; }
+    
+    elIco.textContent = icon;
+    elTtl.textContent = title;
+    elMsg.innerHTML = message;
+    elYes.textContent = yesText;
+    elNo.textContent = noText;
+    
+    box.className = 'confirm-box' + (type ? ' ' + type : '');
+    
+    if(info && info.length){
+      elInf.style.display = 'flex';
+      elInf.innerHTML = info.map(it => `
+        <div class="ci-row">
+          <span class="ci-label">${it.label}</span>
+          <span class="ci-value">${it.value}</span>
+        </div>
+      `).join('');
+    } else {
+      elInf.style.display = 'none';
+      elInf.innerHTML = '';
+    }
+    
+    const cleanup = ()=>{
+      elYes.onclick = null;
+      elNo.onclick = null;
+      bg.onclick = null;
+      document.removeEventListener('keydown', onKey);
+      bg.classList.remove('show');
+    };
+    
+    elYes.onclick = ()=>{ SFX.confirm(); cleanup(); resolve(true); };
+    elNo.onclick = ()=>{ SFX.cancel(); cleanup(); resolve(false); };
+    bg.onclick = (e)=>{ if(e.target === bg){ SFX.cancel(); cleanup(); resolve(false); } };
+    
+    const onKey = (e)=>{
+      if(e.key === 'Escape'){ SFX.cancel(); cleanup(); resolve(false); }
+      else if(e.key === 'Enter'){ SFX.confirm(); cleanup(); resolve(true); }
+    };
+    document.addEventListener('keydown', onKey);
+    
+    bg.classList.add('show');
+    SFX.click();
+  });
+}
+</script>
+<script>
+/* =========================================================================
+   v3.1.2 — BAGIAN 2 JS: Team, Battle, Deck, Gacha, Owner, Init
+   Update v3.1.2: 5 confirm() browser → confirmGame() modal custom
+   ========================================================================= */
 
 function renderTeamSetup(){
   renderTeamPreview();
@@ -1268,14 +1790,19 @@ function renderTeamSetup(){
     const st = applyCheatStats(pk);
     const pickIdx = state.battleTeam.indexOf(pk.uid);
     const locked = state.battleTeamLocked;
+    let extraClass = '';
+    if(pk.isDewa) extraClass = ' dewa';
+    else if(pk.isMega) extraClass = ' mega';
     const el = document.createElement('div');
-    el.className = 'pk'+(pickIdx>=0?' selected':'')+(pk.isMega?' mega':'')+(pickIdx>=0?' in-team':'');
+    el.className = 'pk'+(pickIdx>=0?' selected':'')+extraClass+(pickIdx>=0?' in-team':'');
+    const rarityBadge = pk.isDewa ? '👑 DEWA' : (pk.isMega ? '💎 MEGA' : ('⭐'.repeat(pk.rarity)));
+    const spriteClass = pk.isDewa ? 'sprite dewa-glow' : (pk.isMega ? 'sprite mega-glow' : 'sprite');
     el.innerHTML = `
       <div class="pick-badge">${pickIdx>=0?pickIdx+1:''}</div>
       <div class="type">${pk.type.toUpperCase()}</div>
-      <div class="sprite${pk.isMega?' mega-glow':''}">${pk.emoji}</div>
+      <div class="${spriteClass}">${pk.emoji}</div>
       <div class="name">${pk.name}</div>
-      <div class="lvl">Lv.${pk.level} ${pk.isMega?'💎 MEGA':('⭐'.repeat(pk.rarity))}</div>
+      <div class="lvl">Lv.${pk.level} ${rarityBadge}</div>
       <div class="stats">
         <div class="stat atk">⚔ ATK<br>${st.atk}</div>
         <div class="stat def">🛡 DEF<br>${st.def}</div>
@@ -1298,12 +1825,17 @@ function renderTeamPreview(){
     const uid = state.battleTeam[i];
     const pk = uid ? state.deck.find(p=>p.uid===uid) : null;
     const slot = document.createElement('div');
-    slot.className = 'team-slot' + (pk?' filled':'') + (pk && pk.isMega?' mega-slot':'');
+    let slotClass = 'team-slot' + (pk?' filled':'');
+    if(pk && pk.isDewa) slotClass += ' dewa-slot';
+    else if(pk && pk.isMega) slotClass += ' mega-slot';
+    slot.className = slotClass;
     if(pk){
+      const spriteClass = pk.isDewa ? 'sprite-sm dewa-glow' : (pk.isMega ? 'sprite-sm mega-glow' : 'sprite-sm');
+      const nameColor = pk.isDewa ? '#ffd700' : (pk.isMega ? '#ff3b9a' : '');
       slot.innerHTML = `
         <div class="slot-label">SLOT ${i+1}</div>
-        <div class="sprite-sm${pk.isMega?' mega-glow':''}">${pk.emoji}</div>
-        <div class="slot-name" style="${pk.isMega?'color:#ff3b9a':''}">${pk.name}</div>
+        <div class="${spriteClass}">${pk.emoji}</div>
+        <div class="slot-name" style="${nameColor?'color:'+nameColor:''}">${pk.name}</div>
         <div class="slot-lvl">Lv.${pk.level}</div>`;
     } else {
       slot.innerHTML = `
@@ -1377,11 +1909,16 @@ function renderBattleSetupPreview(){
   }
   team.forEach((pk, i)=>{
     const slot = document.createElement('div');
-    slot.className = 'team-slot filled' + (pk.isMega?' mega-slot':'');
+    let slotClass = 'team-slot filled';
+    if(pk.isDewa) slotClass += ' dewa-slot';
+    else if(pk.isMega) slotClass += ' mega-slot';
+    slot.className = slotClass;
+    const spriteClass = pk.isDewa ? 'sprite-sm dewa-glow' : (pk.isMega ? 'sprite-sm mega-glow' : 'sprite-sm');
+    const nameColor = pk.isDewa ? '#ffd700' : (pk.isMega ? '#ff3b9a' : '');
     slot.innerHTML = `
       <div class="slot-label">SLOT ${i+1}</div>
-      <div class="sprite-sm${pk.isMega?' mega-glow':''}">${pk.emoji}</div>
-      <div class="slot-name" style="${pk.isMega?'color:#ff3b9a':''}">${pk.name}</div>
+      <div class="${spriteClass}">${pk.emoji}</div>
+      <div class="slot-name" style="${nameColor?'color:'+nameColor:''}">${pk.name}</div>
       <div class="slot-lvl">Lv.${pk.level}</div>`;
     wrap.appendChild(slot);
   });
@@ -1393,7 +1930,8 @@ function buildTeamStats(myTeam){
   return myTeam.map(pk=>{
     const st=applyCheatStats(pk);
     return { ref:pk, atk:st.atk, def:st.def, hp:st.hp, maxHp:st.hp,
-             name:pk.name, level:pk.level, emoji:pk.emoji, fainted:false };
+             name:pk.name, level:pk.level, emoji:pk.emoji, fainted:false,
+             isMega: pk.isMega, isDewa: pk.isDewa };
   });
 }
 function startBattle(){
@@ -1412,7 +1950,8 @@ function startBattle(){
     const enemy = makePokemon(randomSpecies(), enemyLv);
     const st = applyCheatStats(enemy);
     oppTeam.push({ ref:enemy, atk:st.atk, def:st.def, hp:st.hp, maxHp:st.hp,
-                   name:enemy.name, level:enemy.level, emoji:enemy.emoji, fainted:false });
+                   name:enemy.name, level:enemy.level, emoji:enemy.emoji, fainted:false,
+                   isMega:false, isDewa:false });
   }
   battle = { meTeam:myTeam, oppTeam:oppTeam, meIdx:0, oppIdx:0,
              me:myTeam[0], opp:oppTeam[0], turn:'me', over:false, timer:null, busy:false };
@@ -1423,6 +1962,9 @@ function startBattle(){
   $('oppName').textContent = battle.opp.name;
   $('meLvl').textContent = 'Lv.'+battle.me.level;
   $('oppLvl').textContent = 'Lv.'+battle.opp.level;
+  const meSp = $('meSprite'), oppSp = $('oppSprite');
+  meSp.className = 'sprite-big' + (battle.me.isDewa?' dewa-glow':(battle.me.isMega?' mega-glow':''));
+  oppSp.className = 'sprite-big' + (battle.opp.isDewa?' dewa-glow':(battle.opp.isMega?' mega-glow':''));
   $('battleLog').innerHTML='';
   log(`⚔️ Pertarungan ${myTeam.length}v${oppTeam.length} dimulai!`);
   log(`⚡ Tim kamu: ${myTeam.map(p=>p.name).join(', ')}`);
@@ -1495,7 +2037,9 @@ function battleLoop(){
   setTimeout(()=>{
     atkEl.classList.remove('attacking', 'attacker-'+atkSide);
     defender.hp = Math.max(0, defender.hp - dmg);
-    defEl.classList.add(atkSide==='me'?'hurt-flip':'hurt');
+    const hurtClass = (atkSide==='me') ? 'hurt' : 'hurt-flip';
+    defEl.classList.add(hurtClass);
+    if(crit) defEl.classList.add('crit');
     SFX.hit();
     const field=$('field');
     field.classList.add('shake');
@@ -1507,7 +2051,10 @@ function battleLoop(){
     floatDmg(defSide, dmg, crit);
     log(`${attacker.name} menyerang ${defender.name} — <b>${dmg}</b> DMG${crit?' <span style="color:#ffd93b">(CRIT!)</span>':''}`, crit?'crit':'hit');
     updateBars();
-    setTimeout(()=>defEl.classList.remove('hurt','hurt-flip'), 500);
+    const animDur = crit ? 650 : 550;
+    setTimeout(()=>{
+      defEl.classList.remove('hurt','hurt-flip','crit');
+    }, animDur);
   }, 320);
   setTimeout(()=>{
     battle.busy = false;
@@ -1541,12 +2088,14 @@ function handleFaint(side){
       $('meSprite').textContent = battle.me.emoji;
       $('meName').textContent = battle.me.name;
       $('meLvl').textContent = 'Lv.'+battle.me.level;
+      $('meSprite').className = 'sprite-big' + (battle.me.isDewa?' dewa-glow':(battle.me.isMega?' mega-glow':''));
       log(`⚡ Kamu mengirim ${battle.me.name}!`, 'switch');
     } else {
       battle.oppIdx = nextIdx; battle.opp = team[nextIdx];
       $('oppSprite').textContent = battle.opp.emoji;
       $('oppName').textContent = battle.opp.name;
       $('oppLvl').textContent = 'Lv.'+battle.opp.level;
+      $('oppSprite').className = 'sprite-big' + (battle.opp.isDewa?' dewa-glow':(battle.opp.isMega?' mega-glow':''));
       log(`👹 Lawan mengirim ${battle.opp.name}!`, 'switch');
     }
     SFX.switch();
@@ -1633,18 +2182,32 @@ function renderDeck(){
   const sorted = sortMegaFirst(state.deck);
   sorted.forEach(pk=>{
     const st=applyCheatStats(pk);
-    const canUpg = !pk.isMega && pk.level < MAX_LEVEL && pk.totalPower < MAX_TOTAL_POWER;
+    const canUpg = !pk.isMega && !pk.isDewa && pk.level < MAX_LEVEL && pk.totalPower < MAX_TOTAL_POWER;
     const upCost = getUpgradeCost(pk);
     const sellPrice = getSellPrice(pk);
     const isBulkSel = bulkSelected.has(pk.uid);
+    let extraClass = '';
+    if(pk.isDewa) extraClass = ' dewa';
+    else if(pk.isMega) extraClass = ' mega';
     const el=document.createElement('div');
-    el.className='pk'+(pk.isMega?' mega':'')+(bulkMode?' bulk-mode':'')+(isBulkSel?' bulk-selected':'');
+    el.className='pk'+extraClass+(bulkMode?' bulk-mode':'')+(isBulkSel?' bulk-selected':'');
+    const spriteClass = pk.isDewa ? 'sprite dewa-glow' : (pk.isMega ? 'sprite mega-glow' : 'sprite');
+    const rarityBadge = pk.isDewa ? '👑 DEWA' : (pk.isMega ? '💎 MEGA' : ('⭐'.repeat(pk.rarity)));
+    let upBtnClass = 'upg-btn';
+    if(pk.isMega) upBtnClass += ' mega-btn';
+    if(pk.isDewa) upBtnClass += ' dewa-btn';
+    let upBtnLabel;
+    if(pk.isDewa) upBtnLabel = '👑 DEWA MAX';
+    else if(pk.isMega) upBtnLabel = '💎 MAX';
+    else if(pk.level >= MAX_LEVEL) upBtnLabel = '✅ Lv.MAX';
+    else if(pk.totalPower >= MAX_TOTAL_POWER) upBtnLabel = '✅ TP.MAX';
+    else upBtnLabel = '⬆️ UP ('+upCost.toLocaleString('id-ID')+'💰)';
     el.innerHTML=`
-      <div class="bulk-check ${isBulkSel?'':''}"></div>
+      <div class="bulk-check"></div>
       <div class="type">${pk.type.toUpperCase()}</div>
-      <div class="sprite${pk.isMega?' mega-glow':''}">${pk.emoji}</div>
+      <div class="${spriteClass}">${pk.emoji}</div>
       <div class="name">${pk.name}</div>
-      <div class="lvl">Lv.${pk.level} ${pk.isMega?'💎 MEGA':('⭐'.repeat(pk.rarity))}</div>
+      <div class="lvl">Lv.${pk.level} ${rarityBadge}</div>
       <div class="stats">
         <div class="stat atk">⚔ ATK<br>${st.atk}</div>
         <div class="stat def">🛡 DEF<br>${st.def}</div>
@@ -1652,12 +2215,7 @@ function renderDeck(){
         <div class="stat tp">💪 TOTAL POWER: ${st.tp}</div>
       </div>
       <div class="btn-row">
-        <button class="upg-btn${pk.isMega?' mega-btn':''}" ${canUpg?'':'disabled'}>
-          ${pk.isMega ? '💎 MAX'
-            : (pk.level >= MAX_LEVEL ? '✅ Lv.MAX'
-            : (pk.totalPower >= MAX_TOTAL_POWER ? '✅ TP.MAX'
-            : '⬆️ UP ('+upCost.toLocaleString('id-ID')+'💰)'))}
-        </button>
+        <button class="${upBtnClass}" ${canUpg?'':'disabled'}>${upBtnLabel}</button>
         <button class="sell-btn">💸 JUAL<br><span style="font-size:10px;opacity:.9">+${sellPrice.toLocaleString('id-ID')}💰</span></button>
       </div>`;
     if(bulkMode){
@@ -1708,6 +2266,7 @@ function doUpgrade(){
   if(!upgradingUid) return;
   const pk = state.deck.find(p=>p.uid===upgradingUid);
   if(!pk){ closeUpgrade(); return; }
+  if(pk.isDewa){ toast('👑 DEWA sudah MAX!'); return; }
   if(pk.isMega){ toast('Mega sudah max!'); return; }
   if(pk.level >= MAX_LEVEL){ toast('Sudah Level MAX (100)!'); return; }
   if(pk.totalPower >= MAX_TOTAL_POWER){ toast('Total Power sudah MAX (1000)!'); return; }
@@ -1831,9 +2390,10 @@ function confirmBulkSell(){
     total += price;
     const row = document.createElement('div');
     row.className = 'stat-line';
-    const isMega = pk.isMega;
+    const isDewa = pk.isDewa, isMega = pk.isMega;
+    const color = isDewa ? '#ffd700' : (isMega ? '#ff3b9a' : '#fff');
     row.innerHTML = `
-      <span>${pk.emoji} <b style="color:${isMega?'#ff3b9a':'#fff'}">${pk.name}</b>
+      <span>${pk.emoji} <b style="color:${color}">${pk.name}</b>
         <span style="opacity:.7;font-size:11px">Lv.${pk.level}</span></span>
       <span style="color:#ff9a4a">+${price.toLocaleString('id-ID')} 💰</span>`;
     listEl.appendChild(row);
@@ -1889,12 +2449,21 @@ function openSellModal(uid){
   const sellPrice = getSellPrice(pk);
   $('sellEmoji').textContent = pk.emoji;
   $('sellName').textContent = pk.name;
-  $('sellInfo').textContent = 'Lv.'+pk.level+' '+(pk.isMega?'💎 MEGA':('⭐'.repeat(pk.rarity)))+'  ·  Total Power: '+pk.totalPower;
+  const rarityTxt = pk.isDewa ? '👑 DEWA' : (pk.isMega ? '💎 MEGA' : ('⭐'.repeat(pk.rarity)));
+  $('sellInfo').textContent = 'Lv.'+pk.level+' '+rarityTxt+'  ·  Total Power: '+pk.totalPower;
   $('sellBasePrice').textContent = basePrice.toLocaleString('id-ID')+' 💰';
   $('sellPrice').textContent = '+'+sellPrice.toLocaleString('id-ID')+' 💰';
   const box = $('sellModalBox');
-  if(pk.isMega) box.style.borderColor = '#ff3b9a';
-  else box.style.borderColor = '#ff9a4a';
+  if(pk.isDewa){
+    box.style.borderColor = '#ffd700';
+    box.style.boxShadow = '0 20px 60px rgba(0,0,0,.9),0 0 80px rgba(255,215,0,.6)';
+  } else if(pk.isMega){
+    box.style.borderColor = '#ff3b9a';
+    box.style.boxShadow = '0 20px 60px rgba(0,0,0,.9),0 0 60px rgba(255,59,154,.5)';
+  } else {
+    box.style.borderColor = '#ff9a4a';
+    box.style.boxShadow = '0 20px 60px rgba(0,0,0,.9),0 0 60px rgba(255,154,74,.5)';
+  }
   $('sellModal').classList.add('show');
   SFX.click();
 }
@@ -1934,20 +2503,17 @@ function pullGacha(times){
   else if(times === 10) cost = GACHA_10X;
   else if(times === 100) cost = GACHA_100X;
   else return;
-
   if(state.profile.coins < cost){
     toast('❌ Coin tidak cukup! Butuh '+cost.toLocaleString('id-ID')+' 💰');
     SFX.cancel(); return;
   }
   state.profile.coins -= cost;
   save(); updateCoinDisplay();
-
   const results = [];
   let totalCoinsWon = 0;
   const pokemonsWon = [];
   let hasMega = false;
   let megaCount = 0;
-
   for(let i=0;i<times;i++){
     state.gachaCount = (state.gachaCount||0) + 1;
     if(state.gachaCount % MEGA_GACHA_THRESHOLD === 0){
@@ -1976,23 +2542,21 @@ function pullGacha(times){
   }
   save();
   renderGachaCounter();
-
   if(state.settings.skipGachaAnim){
     state.profile.coins += totalCoinsWon;
     pokemonsWon.forEach(p=>state.deck.push(p));
     save(); updateCoinDisplay(); renderDeck(); renderGachaCounter();
     if(hasMega) SFX.mega(); else if(totalCoinsWon>0) SFX.coin(); else SFX.gacha();
     SFX.levelup();
-    showGachaResultModal(results, totalCoinsWon, pokemonsWon, hasMega, megaCount);
+    showGachaResultModal(results, totalCoinsWon, pokemonsWon, hasMega, megaCount, false, 0);
     return;
   }
-
   const anim=$('gachaAnim'); anim.classList.add('show');
   if(hasMega) anim.classList.add('mega-show'); else anim.classList.remove('mega-show');
+  anim.classList.remove('dewa-show');
   $('gachaBox').textContent='🎁';
   $('gachaResult').innerHTML='<div style="font-size:14px;opacity:.8">Membuka...</div>';
   SFX.gacha();
-
   const animDelay = times === 100 ? 180 : (times === 10 ? 400 : 900);
   let idx=0;
   const iv = setInterval(()=>{
@@ -2049,15 +2613,348 @@ function pullGacha(times){
     }
   }, animDelay);
 }
-function showGachaResultModal(results, totalCoinsWon, pokemonsWon, hasMega, megaCount){
+
+function pullGachaDewa(times){
+  let cost;
+  if(times === 1) cost = GACHA_DEWA_1X;
+  else if(times === 10) cost = GACHA_DEWA_10X;
+  else if(times === 100) cost = GACHA_DEWA_100X;
+  else if(times === 1000) cost = GACHA_DEWA_1000X;
+  else return;
+  if(state.profile.coins < cost){
+    toast('❌ Coin tidak cukup! Butuh '+cost.toLocaleString('id-ID')+' 💰');
+    SFX.cancel(); return;
+  }
+  state.profile.coins -= cost;
+  save(); updateCoinDisplay();
+  const results = [];
+  let totalCoinsWon = 0;
+  const pokemonsWon = [];
+  let hasDewa = false;
+  let dewaCount = 0;
+  for(let i=0;i<times;i++){
+    state.gachaDewaCount = (state.gachaDewaCount||0) + 1;
+    if(state.gachaDewaCount % DEWA_GACHA_THRESHOLD === 0){
+      const sp = DEWA_POOL[Math.floor(Math.random()*DEWA_POOL.length)];
+      const dewa = makeDewaPokemon(sp);
+      results.push({ type:'dewa', pokemon:dewa });
+      pokemonsWon.push(dewa);
+      hasDewa = true;
+      dewaCount++;
+      continue;
+    }
+    const reward = rollGachaReward();
+    if(reward.type === 'coin'){
+      results.push(reward);
+      totalCoinsWon += reward.amount;
+    } else {
+      if(state.deck.length + pokemonsWon.length >= state.deckCap){
+        results.push({ type:'coin', amount:700, overflow:true });
+        totalCoinsWon += 700;
+      } else {
+        const pk = makePokemon(randomSpecies());
+        results.push({ type:'pokemon', pokemon:pk });
+        pokemonsWon.push(pk);
+      }
+    }
+  }
+  save();
+  renderGachaDewaCounter();
+  if(state.settings.skipGachaAnim){
+    state.profile.coins += totalCoinsWon;
+    pokemonsWon.forEach(p=>state.deck.push(p));
+    save(); updateCoinDisplay(); renderDeck(); renderGachaDewaCounter();
+    if(hasDewa) SFX.dewa(); else if(totalCoinsWon>0) SFX.coin(); else SFX.gacha();
+    SFX.levelup();
+    showGachaResultModal(results, totalCoinsWon, pokemonsWon, false, 0, hasDewa, dewaCount);
+    return;
+  }
+  const anim=$('gachaAnim'); anim.classList.add('show');
+  if(hasDewa){
+    anim.classList.add('dewa-show');
+    anim.classList.remove('mega-show');
+  } else {
+    anim.classList.remove('mega-show','dewa-show');
+  }
+  $('gachaBox').textContent='🎁';
+  $('gachaResult').innerHTML='<div style="font-size:14px;opacity:.8">Membuka DEWA Gacha...</div>';
+  SFX.gacha();
+  const animDelay = times === 1000 ? 60 : (times === 100 ? 130 : (times === 10 ? 320 : 800));
+  let idx=0;
+  const iv = setInterval(()=>{
+    if(idx < results.length){
+      const r = results[idx];
+      if(r.type === 'coin'){
+        $('gachaBox').textContent = '💰';
+        $('gachaResult').innerHTML = `
+          <div style="font-size:80px;animation:pop .5s ease">💰</div>
+          <div style="font-size:34px;font-weight:900;color:#ffd93b;margin-top:8px;text-shadow:0 0 18px rgba(255,215,0,.7)">+${r.amount.toLocaleString('id-ID')} 💰</div>
+          <div style="font-size:13px;opacity:.85">COIN REWARD!</div>
+          ${r.overflow?'<div style="font-size:11px;color:#ff9a9a;margin-top:6px">(Deck penuh → dikonversi ke coin)</div>':''}
+          <div style="font-size:11px;opacity:.6;margin-top:8px">(${idx+1}/${results.length})</div>`;
+        if(times < 100) SFX.coin();
+      } else if(r.type === 'pokemon'){
+        const p = r.pokemon;
+        $('gachaBox').textContent = p.emoji;
+        $('gachaResult').innerHTML = `
+          <div class="gacha-reveal">${p.emoji}</div>
+          <div style="font-size:22px;font-weight:900;color:#ffd93b;margin-top:8px">${p.name}</div>
+          <div style="opacity:.9">Lv.${p.level} ${'⭐'.repeat(p.rarity)}</div>
+          <div style="font-size:12px;opacity:.75;margin-top:4px">Total Power: ${p.totalPower}</div>
+          <div style="font-size:11px;opacity:.6;margin-top:8px">(${idx+1}/${results.length})</div>`;
+        if(times < 100) SFX.gacha();
+      } else if(r.type === 'dewa'){
+        const p = r.pokemon;
+        $('gachaBox').textContent = p.emoji;
+        $('gachaResult').innerHTML = `
+          <div class="gacha-reveal dewa-reveal">${p.emoji}</div>
+          <div style="font-size:28px;font-weight:900;color:#ffd700;margin-top:8px;text-shadow:0 0 20px #ffd700">${p.name}</div>
+          <div style="opacity:.9;color:#ffd700">Lv.${p.level} 👑👑👑👑👑👑👑</div>
+          <div style="font-size:12px;opacity:.85;margin-top:4px">Total Power: <b style="color:#ffd700">${p.totalPower}</b></div>
+          <div style="font-size:14px;color:#ffd700;margin-top:8px;font-weight:900;text-shadow:0 0 15px #ffd700">✨👑 DEWA POKEMON! 👑✨</div>
+          <div style="font-size:11px;opacity:.6;margin-top:8px">(${idx+1}/${results.length})</div>`;
+        SFX.dewa();
+      }
+      idx++;
+    } else {
+      clearInterval(iv);
+      setTimeout(()=>{
+        anim.classList.remove('show','dewa-show');
+        state.profile.coins += totalCoinsWon;
+        pokemonsWon.forEach(p=>state.deck.push(p));
+        save(); updateCoinDisplay(); renderDeck(); renderGachaDewaCounter();
+        const summary = [];
+        if(totalCoinsWon > 0) summary.push('+'+totalCoinsWon.toLocaleString('id-ID')+'💰');
+        if(pokemonsWon.length > 0) summary.push('+'+pokemonsWon.length+' Pokemon');
+        if(dewaCount > 0) summary.push(dewaCount+' DEWA 👑');
+        if(hasDewa) toastDewa('👑 DEWA POKEMON DIDAPATKAN! 👑', 2800);
+        else if(summary.length) toast('✅ '+summary.join('  |  '), 2000);
+        else toast('😅 Zonk! Coba lagi ya', 1800);
+        SFX.levelup();
+      }, hasDewa ? 1500 : 800);
+    }
+  }, animDelay);
+}
+
+/* ✅ v3.1.2: pullGachaCustom sekarang async + pakai confirmGame() */
+async function pullGachaCustom(type){
+  const isMega = type === 'mega';
+  const inp = isMega ? $('customGachaMegaInput') : $('customGachaDewaInput');
+  if(!inp) return;
+  let n = parseInt(inp.value);
+  if(isNaN(n) || n < GACHA_CUSTOM_MIN){
+    toast('❌ Minimal '+GACHA_CUSTOM_MIN+'×!');
+    SFX.cancel();
+    return;
+  }
+  if(n > GACHA_CUSTOM_MAX){
+    toast('❌ Maksimal '+GACHA_CUSTOM_MAX.toLocaleString('id-ID')+'×!');
+    SFX.cancel();
+    return;
+  }
+  const harga1x = isMega ? GACHA_1X : GACHA_DEWA_1X;
+  const totalCost = n * harga1x;
+  if(state.profile.coins < totalCost){
+    toast('❌ Coin tidak cukup! Butuh '+totalCost.toLocaleString('id-ID')+' 💰');
+    SFX.cancel();
+    return;
+  }
+  if(n >= 100){
+    /* ✅ v3.1.2: Pakai modal konfirmasi custom game */
+    const __ok = await confirmGame({
+      icon: isMega ? '🎰' : '🌟',
+      title: (isMega ? 'GACHA MEGA ' : 'GACHA DEWA ') + n.toLocaleString('id-ID') + '×',
+      message: 'Konfirmasi gacha dalam jumlah besar.',
+      yesText: isMega ? '🎰 GACHA!' : '🌟 GACHA!',
+      noText: '❌ BATAL',
+      type: isMega ? 'warn' : 'dewa',
+      info: [
+        { label: '🎯 Jumlah Gacha', value: n.toLocaleString('id-ID') + '×' },
+        { label: '💰 Harga per 1×', value: harga1x.toLocaleString('id-ID') + ' 💰' },
+        { label: '💵 Total Biaya', value: totalCost.toLocaleString('id-ID') + ' 💰' },
+        { label: '💰 Coin Sekarang', value: state.profile.coins.toLocaleString('id-ID') + ' 💰' },
+        { label: '💰 Sisa Setelah', value: (state.profile.coins - totalCost).toLocaleString('id-ID') + ' 💰' }
+      ]
+    });
+    if(!__ok) return;
+  }
+  if(isMega){
+    runGachaWithCount(n, 'mega');
+  } else {
+    runGachaWithCount(n, 'dewa');
+  }
+}
+
+function runGachaWithCount(times, type){
+  const isMega = type === 'mega';
+  const harga1x = isMega ? GACHA_1X : GACHA_DEWA_1X;
+  const cost = times * harga1x;
+  state.profile.coins -= cost;
+  save(); updateCoinDisplay();
+  const results = [];
+  let totalCoinsWon = 0;
+  const pokemonsWon = [];
+  let hasMega = false, megaCount = 0;
+  let hasDewa = false, dewaCount = 0;
+  for(let i=0;i<times;i++){
+    if(isMega){
+      state.gachaCount = (state.gachaCount||0) + 1;
+      if(state.gachaCount % MEGA_GACHA_THRESHOLD === 0){
+        const sp = MEGA_POOL[Math.floor(Math.random()*MEGA_POOL.length)];
+        const mega = makeMegaPokemon(sp);
+        results.push({ type:'mega', pokemon:mega });
+        pokemonsWon.push(mega);
+        hasMega = true; megaCount++;
+        continue;
+      }
+    } else {
+      state.gachaDewaCount = (state.gachaDewaCount||0) + 1;
+      if(state.gachaDewaCount % DEWA_GACHA_THRESHOLD === 0){
+        const sp = DEWA_POOL[Math.floor(Math.random()*DEWA_POOL.length)];
+        const dewa = makeDewaPokemon(sp);
+        results.push({ type:'dewa', pokemon:dewa });
+        pokemonsWon.push(dewa);
+        hasDewa = true; dewaCount++;
+        continue;
+      }
+    }
+    const reward = rollGachaReward();
+    if(reward.type === 'coin'){
+      results.push(reward);
+      totalCoinsWon += reward.amount;
+    } else {
+      if(state.deck.length + pokemonsWon.length >= state.deckCap){
+        results.push({ type:'coin', amount:700, overflow:true });
+        totalCoinsWon += 700;
+      } else {
+        const pk = makePokemon(randomSpecies());
+        results.push({ type:'pokemon', pokemon:pk });
+        pokemonsWon.push(pk);
+      }
+    }
+  }
+  save();
+  if(isMega) renderGachaCounter(); else renderGachaDewaCounter();
+  const shouldSkip = state.settings.skipGachaAnim || times > 100;
+  if(shouldSkip){
+    state.profile.coins += totalCoinsWon;
+    pokemonsWon.forEach(p=>state.deck.push(p));
+    save(); updateCoinDisplay(); renderDeck();
+    if(isMega) renderGachaCounter(); else renderGachaDewaCounter();
+    if(hasDewa) SFX.dewa();
+    else if(hasMega) SFX.mega();
+    else if(totalCoinsWon>0) SFX.coin();
+    else SFX.gacha();
+    SFX.levelup();
+    showGachaResultModal(results, totalCoinsWon, pokemonsWon, hasMega, megaCount, hasDewa, dewaCount);
+    return;
+  }
+  const anim = $('gachaAnim'); anim.classList.add('show');
+  if(hasDewa){
+    anim.classList.add('dewa-show'); anim.classList.remove('mega-show');
+  } else if(hasMega){
+    anim.classList.add('mega-show'); anim.classList.remove('dewa-show');
+  } else {
+    anim.classList.remove('mega-show','dewa-show');
+  }
+  $('gachaBox').textContent = '🎁';
+  $('gachaResult').innerHTML = '<div style="font-size:14px;opacity:.8">Membuka '+times+'×...</div>';
+  SFX.gacha();
+  const animDelay = times > 50 ? 120 : (times > 10 ? 250 : 500);
+  let idx = 0;
+  const iv = setInterval(()=>{
+    if(idx < results.length){
+      const r = results[idx];
+      if(r.type === 'coin'){
+        $('gachaBox').textContent = '💰';
+        $('gachaResult').innerHTML = `
+          <div style="font-size:80px;animation:pop .5s ease">💰</div>
+          <div style="font-size:34px;font-weight:900;color:#ffd93b;margin-top:8px;text-shadow:0 0 18px rgba(255,215,0,.7)">+${r.amount.toLocaleString('id-ID')} 💰</div>
+          <div style="font-size:13px;opacity:.85">COIN REWARD!</div>
+          ${r.overflow?'<div style="font-size:11px;color:#ff9a9a;margin-top:6px">(Deck penuh → dikonversi ke coin)</div>':''}
+          <div style="font-size:11px;opacity:.6;margin-top:8px">(${idx+1}/${results.length})</div>`;
+        if(times < 20) SFX.coin();
+      } else if(r.type === 'pokemon'){
+        const p = r.pokemon;
+        $('gachaBox').textContent = p.emoji;
+        $('gachaResult').innerHTML = `
+          <div class="gacha-reveal">${p.emoji}</div>
+          <div style="font-size:22px;font-weight:900;color:#ffd93b;margin-top:8px">${p.name}</div>
+          <div style="opacity:.9">Lv.${p.level} ${'⭐'.repeat(p.rarity)}</div>
+          <div style="font-size:12px;opacity:.75;margin-top:4px">Total Power: ${p.totalPower}</div>
+          <div style="font-size:11px;opacity:.6;margin-top:8px">(${idx+1}/${results.length})</div>`;
+        if(times < 20) SFX.gacha();
+      } else if(r.type === 'mega'){
+        const p = r.pokemon;
+        $('gachaBox').textContent = p.emoji;
+        $('gachaResult').innerHTML = `
+          <div class="gacha-reveal mega-reveal">${p.emoji}</div>
+          <div style="font-size:26px;font-weight:900;color:#ff3b9a;margin-top:8px">${p.name}</div>
+          <div style="opacity:.9">Lv.${p.level} 💎💎💎💎💎</div>
+          <div style="font-size:12px;opacity:.75;margin-top:4px">Total Power: <b style="color:#ff3b9a">${p.totalPower}</b></div>
+          <div style="font-size:11px;color:#ff3b9a;margin-top:8px;font-weight:900">✨ MEGA POKEMON! ✨</div>
+          <div style="font-size:11px;opacity:.6;margin-top:8px">(${idx+1}/${results.length})</div>`;
+        SFX.mega();
+      } else if(r.type === 'dewa'){
+        const p = r.pokemon;
+        $('gachaBox').textContent = p.emoji;
+        $('gachaResult').innerHTML = `
+          <div class="gacha-reveal dewa-reveal">${p.emoji}</div>
+          <div style="font-size:28px;font-weight:900;color:#ffd700;margin-top:8px;text-shadow:0 0 20px #ffd700">${p.name}</div>
+          <div style="opacity:.9;color:#ffd700">Lv.${p.level} 👑👑👑👑👑👑👑</div>
+          <div style="font-size:12px;opacity:.85;margin-top:4px">Total Power: <b style="color:#ffd700">${p.totalPower}</b></div>
+          <div style="font-size:14px;color:#ffd700;margin-top:8px;font-weight:900;text-shadow:0 0 15px #ffd700">✨👑 DEWA POKEMON! 👑✨</div>
+          <div style="font-size:11px;opacity:.6;margin-top:8px">(${idx+1}/${results.length})</div>`;
+        SFX.dewa();
+      }
+      idx++;
+    } else {
+      clearInterval(iv);
+      setTimeout(()=>{
+        anim.classList.remove('show','mega-show','dewa-show');
+        state.profile.coins += totalCoinsWon;
+        pokemonsWon.forEach(p=>state.deck.push(p));
+        save(); updateCoinDisplay(); renderDeck();
+        if(isMega) renderGachaCounter(); else renderGachaDewaCounter();
+        const summary = [];
+        if(totalCoinsWon > 0) summary.push('+'+totalCoinsWon.toLocaleString('id-ID')+'💰');
+        if(pokemonsWon.length > 0) summary.push('+'+pokemonsWon.length+' Pokemon');
+        if(megaCount > 0) summary.push(megaCount+' MEGA 💎');
+        if(dewaCount > 0) summary.push(dewaCount+' DEWA 👑');
+        if(hasDewa) toastDewa('👑 DEWA POKEMON DIDAPATKAN! 👑', 2800);
+        else if(hasMega) toast('💎 MEGA POKEMON DIDAPATKAN! 💎', 2500);
+        else if(summary.length) toast('✅ '+summary.join('  |  '), 2000);
+        else toast('😅 Zonk! Coba lagi ya', 1800);
+        SFX.levelup();
+      }, (hasDewa || hasMega) ? 1500 : 800);
+    }
+  }, animDelay);
+}
+
+function showGachaResultModal(results, totalCoinsWon, pokemonsWon, hasMega, megaCount, hasDewa, dewaCount){
   const listEl = $('grmList');
   listEl.innerHTML = '';
   const summaryEl = $('grmSummary');
   const parts = [];
   if(totalCoinsWon > 0) parts.push('<b style="color:#ffd93b">+'+totalCoinsWon.toLocaleString('id-ID')+' 💰</b>');
-  if(pokemonsWon.length - megaCount > 0) parts.push('<b style="color:#7cff7a">+'+(pokemonsWon.length - megaCount)+' Pokemon</b>');
+  const normalCount = pokemonsWon.length - megaCount - dewaCount;
+  if(normalCount > 0) parts.push('<b style="color:#7cff7a">+'+normalCount+' Pokemon</b>');
   if(megaCount > 0) parts.push('<b style="color:#ff3b9a">💎 +'+megaCount+' MEGA!</b>');
+  if(dewaCount > 0) parts.push('<b style="color:#ffd700">👑 +'+dewaCount+' DEWA!</b>');
   summaryEl.innerHTML = parts.join('  ·  ');
+  const box = $('gachaResultModalBox');
+  if(hasDewa){
+    box.className = 'modal dewa';
+    $('grmTitle').textContent = '👑 DEWA GACHA!';
+  } else if(hasMega){
+    box.className = 'modal';
+    box.style.borderColor = '#ff3b9a';
+    $('grmTitle').textContent = '💎 MEGA GACHA!';
+  } else {
+    box.className = 'modal';
+    box.style.borderColor = '';
+    $('grmTitle').textContent = '🎁 HASIL GACHA';
+  }
   const coinSummary = {};
   results.forEach(r=>{
     if(r.type==='coin'){ coinSummary[r.amount] = (coinSummary[r.amount]||0)+1; }
@@ -2072,8 +2969,11 @@ function showGachaResultModal(results, totalCoinsWon, pokemonsWon, hasMega, mega
   sortedPk.forEach(p=>{
     const item = document.createElement('div');
     item.className = 'stat-line';
-    const isMega = p.isMega;
-    item.innerHTML = `<span>${p.emoji} <b style="color:${isMega?'#ff3b9a':'#fff'}">${p.name}</b> <span style="opacity:.7;font-size:11px">Lv.${p.level}</span></span><span style="color:${isMega?'#ff3b9a':'#ffd93b'}">${p.totalPower} TP</span>`;
+    let color = '#fff';
+    let tag = '⭐'.repeat(p.rarity);
+    if(p.isDewa){ color = '#ffd700'; tag = '👑 DEWA'; }
+    else if(p.isMega){ color = '#ff3b9a'; tag = '💎 MEGA'; }
+    item.innerHTML = `<span>${p.emoji} <b style="color:${color}">${p.name}</b> <span style="opacity:.7;font-size:11px">Lv.${p.level} ${tag}</span></span><span style="color:${color}">${p.totalPower} TP</span>`;
     listEl.appendChild(item);
   });
   if(!listEl.children.length){
@@ -2090,7 +2990,9 @@ function renderProfile(){
   $('stCoins').textContent = state.profile.coins.toLocaleString('id-ID');
   $('stPok').textContent = state.deck.length;
   $('stMega').textContent = state.deck.filter(p=>p.isMega).length;
+  $('stDewa').textContent = state.deck.filter(p=>p.isDewa).length;
   $('stGacha').textContent = state.gachaCount.toLocaleString('id-ID');
+  $('stGachaDewa').textContent = (state.gachaDewaCount||0).toLocaleString('id-ID');
   $('stSold').textContent = (state.profile.sold||0).toLocaleString('id-ID');
   $('avatar').textContent = state.profile.name ? '🧢' : '👤';
 }
@@ -2129,7 +3031,7 @@ function toggleMusic(){
   if(state.settings.musicOn){
     const currentScreen = document.querySelector('.screen.active');
     const scr = currentScreen ? currentScreen.id.replace('screen-','') : 'menu';
-    const target = (scr==='battle'||scr==='gacha'||scr==='owner') ? scr : 'menu';
+    const target = (scr==='battle'||scr==='gacha'||scr==='gacha-dewa'||scr==='owner') ? scr : 'menu';
     startMusic(getMusicForScreen(target));
   } else stopMusic();
   save();
@@ -2139,10 +3041,28 @@ function toggleSfx(){
   $('btnSfx').textContent = state.settings.sfxOn ? 'ON' : 'OFF';
   save();
 }
-function resetGame(){
-  if(!confirm('Yakin reset SEMUA data? (tidak bisa dibatalkan)')) return;
+
+/* ✅ v3.1.2: resetGame sekarang async + pakai confirmGame() */
+async function resetGame(){
+  const __ok = await confirmGame({
+    icon: '💀',
+    title: 'RESET SEMUA DATA?',
+    message: '<b style="color:#ff4a4a;font-size:16px">⚠️ PERINGATAN ⚠️</b><br>SEMUA data akan dihapus permanen!',
+    yesText: '💀 HAPUS SEMUA',
+    noText: '❌ BATAL',
+    type: 'danger',
+    info: [
+      { label: '👤 Nama', value: '❌ Hilang' },
+      { label: '💰 Coin', value: '❌ Hilang' },
+      { label: '🎴 Deck', value: '❌ Hilang' },
+      { label: '👑 DEWA & MEGA', value: '❌ Hilang' },
+      { label: '📊 Statistik', value: '❌ Hilang' }
+    ]
+  });
+  if(!__ok) return;
   localStorage.removeItem(LS_KEY);
-  localStorage.removeItem('pokemon_battle_2d_gereno_v1');
+  localStorage.removeItem(LS_KEY_OLD_V2);
+  localStorage.removeItem(LS_KEY_OLD_V1);
   location.reload();
 }
 
@@ -2196,6 +3116,8 @@ function renderOwnerPanel(){
   setS('cheatTp',  state.cheat.tp,  'cheatTpVal');
   const own = $('ownGachaNow');
   if(own) own.textContent = (state.gachaCount||0).toLocaleString('id-ID');
+  const ownDewa = $('ownGachaDewaNow');
+  if(ownDewa) ownDewa.textContent = (state.gachaDewaCount||0).toLocaleString('id-ID');
 }
 ['cheatAtk','cheatDef','cheatHp','cheatTp'].forEach((id,i)=>{
   const el=$(id); if(!el) return;
@@ -2217,45 +3139,32 @@ function parseOwnerNumber(inputEl, defaultVal){
   if(isNaN(n)) return null;
   return n;
 }
-
 function cheatSetCoinsCustom(){
   const input = $('ownCoinInput');
   const n = parseOwnerNumber(input, null);
-  if(n === null || n < 0){
-    toast('❌ Masukkan angka yang valid!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 0){ toast('❌ Masukkan angka yang valid!'); SFX.cancel(); return; }
   state.profile.coins = n;
   save(); updateCoinDisplay();
   SFX.coin();
   toast('💰 Coin diset ke '+n.toLocaleString('id-ID'));
   input.value = '';
 }
-
 function cheatAddCoinsCustom(){
   const input = $('ownCoinAdd');
   const n = parseOwnerNumber(input, null);
-  if(n === null || n < 0){
-    toast('❌ Masukkan angka yang valid!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 0){ toast('❌ Masukkan angka yang valid!'); SFX.cancel(); return; }
   state.profile.coins += n;
   save(); updateCoinDisplay();
   SFX.coin();
   toast('💰 +'+n.toLocaleString('id-ID')+' Coin');
   input.value = '';
 }
-
 function cheatAddCoins(n){ state.profile.coins += n; save(); updateCoinDisplay(); SFX.coin(); toast('💰 +'+n.toLocaleString('id-ID')+' Coin'); }
 function cheatResetCoins(){ state.profile.coins=0; save(); updateCoinDisplay(); toast('Coin direset ke 0'); }
-
 function cheatSetDeckCapCustom(){
   const input = $('ownCapInput');
   const n = parseOwnerNumber(input, null);
-  if(n === null || n < 10){
-    toast('❌ Minimal kapasitas 10!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 10){ toast('❌ Minimal kapasitas 10!'); SFX.cancel(); return; }
   state.deckCap = n;
   save(); renderOwnerPanel(); renderDeck();
   SFX.levelup();
@@ -2268,14 +3177,10 @@ function cheatSetDeckCap(n){
   SFX.levelup();
   toast('✅ Kapasitas Deck = '+n.toLocaleString('id-ID'));
 }
-
 function cheatSetUpgradeCostCustom(){
   const input = $('ownCostInput');
   const n = parseOwnerNumber(input, null);
-  if(n === null || n < 0){
-    toast('❌ Masukkan angka valid!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 0){ toast('❌ Masukkan angka valid!'); SFX.cancel(); return; }
   state.upgradeCost = n;
   save(); renderOwnerPanel(); renderDeck();
   SFX.confirm();
@@ -2284,14 +3189,10 @@ function cheatSetUpgradeCostCustom(){
 }
 function cheatResetUpgrade(){ state.upgradeCost=DEFAULT_UPGRADE_COST; save(); renderOwnerPanel(); renderDeck(); toast('✅ Biaya upgrade direset ke 5000'); }
 function cheatFreeUpgrade(){ state.freeUpgrade=!state.freeUpgrade; save(); renderOwnerPanel(); renderDeck(); toast(state.freeUpgrade?'✅ Upgrade GRATIS ON':'❌ Upgrade Gratis OFF'); }
-
 function cheatSetStatsCustom(){
   const input = $('ownStatInput');
   const n = parseOwnerNumber(input, null);
-  if(n === null || n < 1){
-    toast('❌ Minimal 1!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 1){ toast('❌ Minimal 1!'); SFX.cancel(); return; }
   const v = Math.min(n, 500);
   state.cheat = { atk:v, def:v, hp:v, tp:v };
   save(); renderOwnerPanel();
@@ -2301,19 +3202,15 @@ function cheatSetStatsCustom(){
 }
 function cheatResetStats(){ state.cheat={atk:1,def:1,hp:1,tp:1}; save(); renderOwnerPanel(); toast('✅ Semua stat direset ke 1.0x'); }
 function cheatApplyStats(v){ state.cheat={atk:v,def:v,hp:v,tp:v}; save(); renderOwnerPanel(); toast('🚀 Stat diset ke '+v.toFixed(1)+'x'); }
-
 function cheatSetGachaCustom(){
   const input = $('ownGachaInput');
   const n = parseOwnerNumber(input, null);
-  if(n === null || n < 0){
-    toast('❌ Masukkan angka valid!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 0){ toast('❌ Masukkan angka valid!'); SFX.cancel(); return; }
   state.gachaCount = n;
   save(); renderGachaCounter(); renderOwnerPanel();
   SFX.confirm();
   const next = (Math.floor(n / MEGA_GACHA_THRESHOLD) + 1) * MEGA_GACHA_THRESHOLD;
-  toast('🎰 Gacha counter = '+n.toLocaleString('id-ID')+' (MEGA berikut di '+next.toLocaleString('id-ID')+')', 2800);
+  toast('🎰 Gacha MEGA counter = '+n.toLocaleString('id-ID')+' (MEGA berikut di '+next.toLocaleString('id-ID')+')', 2800);
   input.value = '';
 }
 function cheatSetGachaNear(){
@@ -2322,9 +3219,42 @@ function cheatSetGachaNear(){
   save(); renderGachaCounter(); renderOwnerPanel();
   toast('🎰 Gacha counter = '+next.toLocaleString('id-ID')+'. Gacha 1x lagi = MEGA!');
 }
+function cheatSetGachaDewaCustom(){
+  const input = $('ownGachaDewaInput');
+  const n = parseOwnerNumber(input, null);
+  if(n === null || n < 0){ toast('❌ Masukkan angka valid!'); SFX.cancel(); return; }
+  state.gachaDewaCount = n;
+  save(); renderGachaDewaCounter(); renderOwnerPanel();
+  SFX.confirm();
+  const next = (Math.floor(n / DEWA_GACHA_THRESHOLD) + 1) * DEWA_GACHA_THRESHOLD;
+  toast('🌟 Gacha DEWA counter = '+n.toLocaleString('id-ID')+' (DEWA berikut di '+next.toLocaleString('id-ID')+')', 2800);
+  input.value = '';
+}
+function cheatSetGachaDewaNear(){
+  const next = (Math.floor((state.gachaDewaCount||0) / DEWA_GACHA_THRESHOLD) + 1) * DEWA_GACHA_THRESHOLD - 1;
+  state.gachaDewaCount = next;
+  save(); renderGachaDewaCounter(); renderOwnerPanel();
+  toastDewa('🌟 Gacha counter DEWA = '+next.toLocaleString('id-ID')+'. Gacha 1x lagi = DEWA!');
+}
 
-function cheatResetToNormal(){
-  if(!confirm('Reset game ke kondisi NORMAL?\n\nSemua efek cheat akan dihapus:\n• Stat ×1.0x (normal)\n• Upgrade Gratis OFF\n• Biaya upgrade normal (5000)\n• Kapasitas Deck normal\n\n✅ Progress (Coin, Deck, Menang) TETAP AMAN.')) return;
+/* ✅ v3.1.2: cheatResetToNormal sekarang async + pakai confirmGame() */
+async function cheatResetToNormal(){
+  const __ok = await confirmGame({
+    icon: '🔄',
+    title: 'RESET KE NORMAL?',
+    message: 'Semua <b style="color:#ff7a7a">efek cheat</b> akan dihapus.<br>Game kembali ke kondisi normal.',
+    yesText: '🔄 RESET',
+    noText: '❌ BATAL',
+    type: 'success',
+    info: [
+      { label: '⚡ Stat Multiplier', value: '→ 1.0×' },
+      { label: '💰 Upgrade Gratis', value: '→ OFF' },
+      { label: '🏷️ Biaya Upgrade', value: '→ 5.000' },
+      { label: '📦 Kapasitas Deck', value: '→ Normal' },
+      { label: '✅ Progress', value: 'Aman' }
+    ]
+  });
+  if(!__ok) return;
   state.cheat = { atk:1, def:1, hp:1, tp:1 };
   state.freeUpgrade = false;
   state.upgradeCost = DEFAULT_UPGRADE_COST;
@@ -2341,10 +3271,7 @@ function cheatResetToNormal(){
 function cheatGiveRandomPokemonCustom(){
   const input = $('ownGivePokemonInput');
   const n = parseOwnerNumber(input, 10);
-  if(n === null || n < 1 || n > 500){
-    toast('❌ Jumlah 1-500!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 1 || n > 500){ toast('❌ Jumlah 1-500!'); SFX.cancel(); return; }
   let added = 0;
   for(let i=0;i<n;i++){
     if(state.deck.length >= state.deckCap) state.deckCap++;
@@ -2356,14 +3283,10 @@ function cheatGiveRandomPokemonCustom(){
   toast('🎁 '+added+' Pokemon random ditambahkan! (Total: '+state.deck.length+')', 2500);
   input.value = '';
 }
-
 function cheatGiveMegaCustom(){
   const input = $('ownGiveMegaInput');
   const n = parseOwnerNumber(input, 1);
-  if(n === null || n < 1 || n > 100){
-    toast('❌ Jumlah 1-100!');
-    SFX.cancel(); return;
-  }
+  if(n === null || n < 1 || n > 100){ toast('❌ Jumlah 1-100!'); SFX.cancel(); return; }
   for(let i=0;i<n;i++){
     if(state.deck.length >= state.deckCap) state.deckCap++;
     const sp = MEGA_POOL[Math.floor(Math.random()*MEGA_POOL.length)];
@@ -2374,7 +3297,20 @@ function cheatGiveMegaCustom(){
   toast('💎 '+n+' MEGA Pokemon didapatkan!', 2500);
   input.value = '';
 }
-
+function cheatGiveDewaCustom(){
+  const input = $('ownGiveDewaInput');
+  const n = parseOwnerNumber(input, 1);
+  if(n === null || n < 1 || n > 100){ toast('❌ Jumlah 1-100!'); SFX.cancel(); return; }
+  for(let i=0;i<n;i++){
+    if(state.deck.length >= state.deckCap) state.deckCap++;
+    const sp = DEWA_POOL[Math.floor(Math.random()*DEWA_POOL.length)];
+    state.deck.push(makeDewaPokemon(sp));
+  }
+  save(); renderOwnerPanel(); renderDeck(); updateCoinDisplay();
+  SFX.dewa();
+  toastDewa('👑 '+n+' DEWA Pokemon didapatkan!');
+  input.value = '';
+}
 function cheatGiveAllPokemon(){
   const owned = new Set(state.deck.map(p=>p.name));
   let added=0;
@@ -2394,14 +3330,29 @@ function cheatWinBattle(){
   save(); updateCoinDisplay(); SFX.win();
   toast('🏆 Auto Menang! +2000 💰');
 }
-function cheatSellAllCommon(){
-  const commons = state.deck.filter(p=>!p.isMega && p.rarity === 1);
+
+/* ✅ v3.1.2: cheatSellAllCommon sekarang async + pakai confirmGame() */
+async function cheatSellAllCommon(){
+  const commons = state.deck.filter(p=>!p.isMega && !p.isDewa && p.rarity === 1);
   if(!commons.length){ toast('❌ Tidak ada Pokemon Common (⭐)'); SFX.cancel(); return; }
-  if(!confirm('Jual SEMUA Pokemon Common (⭐) = '+commons.length+' Pokemon?')) return;
+  const totalPreview = commons.reduce((s,pk)=>s+getSellPrice(pk), 0);
+  const __ok = await confirmGame({
+    icon: '💸',
+    title: 'JUAL SEMUA COMMON?',
+    message: 'Semua Pokemon Common (⭐) akan dijual.<br><b style="color:#ff7a7a">Tidak bisa dibatalkan!</b>',
+    yesText: '💸 JUAL',
+    noText: '❌ BATAL',
+    type: 'warn',
+    info: [
+      { label: '🎴 Jumlah Pokemon', value: commons.length + ' Pokemon' },
+      { label: '💰 Total Coin', value: '+' + totalPreview.toLocaleString('id-ID') + ' 💰' }
+    ]
+  });
+  if(!__ok) return;
   let total = 0;
   commons.forEach(pk=>{ total += getSellPrice(pk); });
   const commonUids = commons.map(p=>p.uid);
-  state.deck = state.deck.filter(p=>p.isMega || p.rarity !== 1);
+  state.deck = state.deck.filter(p=>p.isMega || p.isDewa || p.rarity !== 1);
   state.battleTeam = state.battleTeam.filter(uid => !commonUids.includes(uid));
   if(state.battleTeam.length === 0) state.battleTeamLocked = false;
   state.profile.coins += total;
@@ -2411,12 +3362,30 @@ function cheatSellAllCommon(){
   SFX.sell();
   toast('💸 Jual '+commons.length+' Common! +'+total.toLocaleString('id-ID')+' 💰', 2500);
 }
-function cheatResetProgress(){
-  if(!confirm('Reset semua progress KECUALI nama?')) return;
+
+/* ✅ v3.1.2: cheatResetProgress sekarang async + pakai confirmGame() */
+async function cheatResetProgress(){
+  const __ok = await confirmGame({
+    icon: '🗑️',
+    title: 'RESET PROGRESS?',
+    message: 'Semua progress akan dihapus.<br><b style="color:#7cff7a">Nama tetap aman.</b>',
+    yesText: '🗑️ RESET',
+    noText: '❌ BATAL',
+    type: 'danger',
+    info: [
+      { label: '💰 Coin', value: '→ 5.000' },
+      { label: '🎴 Deck', value: '→ Kosong' },
+      { label: '🎰 Counter Gacha', value: '→ 0' },
+      { label: '👤 Nama', value: '✅ Tetap' }
+    ]
+  });
+  if(!__ok) return;
   const name = state.profile.name;
   state.profile={ name:name, coins:5000, wins:0, losses:0, sold:0 };
   state.deck=[]; state.deckCap=START_CAP; state.upgradeCost=DEFAULT_UPGRADE_COST;
-  state.freeUpgrade=false; state.cheat={atk:1,def:1,hp:1,tp:1}; state.gachaCount=0;
+  state.freeUpgrade=false; state.cheat={atk:1,def:1,hp:1,tp:1};
+  state.gachaCount=0;
+  state.gachaDewaCount=0;
   state.battleTeam=[]; state.battleTeamLocked=false;
   bulkMode = false; bulkSelected.clear();
   save(); renderOwnerPanel(); renderDeck(); updateCoinDisplay();
@@ -2438,9 +3407,12 @@ function cheatResetProgress(){
   renderSettings();
   renderMusicSelects();
   renderGachaCounter();
+  renderGachaDewaCounter();
   renderSkipCheckbox();
   updateBulkUI();
+  renderCustomGachaHint('mega');
+  renderCustomGachaHint('dewa');
 })();
 </script>
 </body>
-  </html>
+</html>
